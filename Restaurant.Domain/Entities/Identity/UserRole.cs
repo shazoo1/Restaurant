@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Domain.Entities.Identity
 {
-    class UserRole
+    public class UserRole
     {
     }
 }

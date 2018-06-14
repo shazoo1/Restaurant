@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaurant.Domain
+namespace Restaurant.Domain.Enums
 {
-    public class Class1
+    public enum OrderState
     {
+        accepted, ready, served, paid
     }
 }

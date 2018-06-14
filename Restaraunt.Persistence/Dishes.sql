@@ -1,4 +1,0 @@
-﻿CREATE TABLE [dbo].[Dishes]
-(
-	[Id] INT NOT NULL PRIMARY KEY
-)

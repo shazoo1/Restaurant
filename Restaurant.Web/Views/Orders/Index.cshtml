@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Заказы";
+}
+
+<div class="jumbotron">
+    <h1>Список заказов</h1>
+</div>
+
+<div class="row">
+    <table style="width:100%">
+        <tr>
+            <th>Номер столика</th>
+            <th>Сумма</th>
+            <th>Создан</th>
+            <th>Изменён</th>
+            <th>Статус</th>
+            <th>Официант</th>
+        </tr>
+        @foreach (var order in Model.OrdersList)
+        {
+            <tr><td>@order.TableNumber</td>
+            <td>@order.Price</td>
+            <td>@order.CreatedAt</td>
+            <td>@order.LastModifiedAt</td>
+            <td>@order.OrderState</td>
+            <td>@order.UserName</td></tr>
+        }
+    </table>
+</div>

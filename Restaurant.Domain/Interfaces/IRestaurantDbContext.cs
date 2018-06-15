@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Domain.Interfaces
 {
-    public interface IRestarauntDbContext : IDisposable
+    public interface IRestaurantDbContext : IDisposable
     {
         DbContext DbContext { get; }
     }

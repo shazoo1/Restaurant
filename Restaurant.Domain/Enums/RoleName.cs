@@ -8,8 +8,8 @@ namespace Restaurant.Domain.Enums
 {
     public static class RoleName
     {
-        public static string ADMIN = "Admin";
-        public static string COOK = "Cook";
-        public static string WAITER = "Waiter";
+        public static string Admin = "Admin";
+        public static string Cook = "Cook";
+        public static string Waiter = "Waiter";
     }
 }

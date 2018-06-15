@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Меню";
+}
+
+<h2>Меню</h2>
+@using (Html.BeginForm("Add", "Menu"))
+{
+<input type="submit" value="Добавить" formaction=@Url.Action("Add") formmethod="get"/>
+}
+<table>
+    <tr>
+        <td>Блюдо</td>
+        <td>Стоимость</td>
+        <td>Описание</td>
+    </tr>
+    @foreach (var dish in Model.Dishes)
+    {
+        <tr>
+            <td>@dish.Name</td>
+            <td>@dish.Price</td>
+            <td>@dish.Description</td>
+        </tr>
+    }
+
+</table>

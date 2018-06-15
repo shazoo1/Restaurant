@@ -87,7 +87,7 @@
     <Compile Include="Identity\Store\RoleStore.cs" />
     <Compile Include="Identity\Store\UserStore.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Interfaces\IRestarauntDbContext.cs" />
+    <Compile Include="Interfaces\IRestaurantDbContext.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -9,6 +9,7 @@ namespace Restaurant.Service.Interfaces
 {
     public interface IBaseService<T> where T : BaseEntity
     {
+        List<T> GetAll();
         T GetById(Guid id);
         void Remove(Guid id);
         void Remove(T item);

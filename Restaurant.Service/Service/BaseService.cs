@@ -17,6 +17,12 @@ namespace Restaurant.Service.Service
             _uow = uow;
         }
 
+        public List<T> GetAll()
+        {
+            var items = _uow.Get<T>().GetAll();
+            return ((IEnumerable<T>)items).ToList();
+        }
+
         public T Add(T item)
         {
             _uow.Get<T>().Add(item);

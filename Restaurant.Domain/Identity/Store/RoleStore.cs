@@ -11,6 +11,6 @@ namespace Restaurant.Domain.Identity.Store
 {
     public class RoleStore : RoleStore<Role, Guid, UserRole>
     {
-        public RoleStore(IRestarauntDbContext context) : base(context.DbContext) { }
+        public RoleStore(IRestaurantDbContext context) : base(context.DbContext) { }
     }
 }

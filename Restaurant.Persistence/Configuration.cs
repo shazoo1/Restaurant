@@ -16,7 +16,7 @@ namespace Restaurant.Persistence
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(RestaurantDbContext context)
@@ -37,21 +37,21 @@ namespace Restaurant.Persistence
 
             var superUser = new User
             {
-                Id = new Guid("11111111-1111-1111-1111-111111111111"),
+                Id = new Guid("1ABB568A-2ECD-43E6-B814-BE164CF2F6F4"),
                 Email = "admin@admin.com",
                 UserName = "admin"
             };
-            var adminPassword = "admin";
+            var adminPassword = "AdminPassword";
 
             if(userManager.FindByName(superUser.UserName) == null)
             {
                 userManager.Create(superUser, adminPassword);
                 userManager.SetLockoutEnabled(superUser.Id, false);
             }
-            var adminRole = RoleName.ADMIN;
+            var adminRole = RoleName.Admin;
             var rolesForUser = userManager.GetRoles(superUser.Id);
             if (!rolesForUser.Contains(adminRole))
-                userManager.AddToRole(superUser.Id, RoleName.ADMIN);
+                userManager.AddToRole(superUser.Id, RoleName.Admin);
 
             base.Seed(context);
         }

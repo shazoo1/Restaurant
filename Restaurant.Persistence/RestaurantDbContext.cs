@@ -13,16 +13,12 @@ using Restaurant.Persistence.Mapping;
 
 namespace Restaurant.Persistence
 {
-    public class RestaurantDbContext : IdentityDbContext<User, Role, Guid, UserLogin, UserRole, UserClaim>, IRestarauntDbContext
+    public class RestaurantDbContext : IdentityDbContext<User, Role, Guid, UserLogin, UserRole, UserClaim>, IRestaurantDbContext
     {
-        public RestaurantDbContext() : base("RestarauntDbContext")
+        public RestaurantDbContext() : base("RestaurantDbContext")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<RestaurantDbContext, Configuration>());
-            Database.Log = e => Debug.WriteLine($"RestarauntDbContext: {e}");
-            if (!Database.Exists())
-            {
-                Database.Create();
-            }
+            Database.Log = e => Debug.WriteLine($"RestaurantDbContext: {e}");
         }
 
         public DbSet<Dish> Dishes { get; set; }

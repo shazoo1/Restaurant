@@ -45,10 +45,11 @@ namespace Restaurant.Web
             // container.LoadConfiguration();
             //TODO :: Register services
             container.RegisterType<IOrderService, OrderService>();
+            container.RegisterType<IDishService, DishService>();
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterType<IRestarauntDbContext, RestaurantDbContext>();
+            container.RegisterType<IRestaurantDbContext, RestaurantDbContext>();
             container.RegisterType<IUnitOfWork, UnitOfWork>(new PerRequestLifetimeManager());
         }
     }

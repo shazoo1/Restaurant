@@ -11,6 +11,6 @@ namespace Restaurant.Domain.Identity.Store
 {
     public class UserStore : UserStore<User, Role, Guid, UserLogin, UserRole, UserClaim>
     {
-        public UserStore(IRestarauntDbContext context) : base(context.DbContext) { }
+        public UserStore(IRestaurantDbContext context) : base(context.DbContext) { }
     }
 }

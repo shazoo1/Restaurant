@@ -10,5 +10,6 @@ namespace Restaurant.Service.Interfaces
     public interface IOrderService : IBaseService<Order>
     {
         List<Order> GetAll();
+        void AddNewOrder(Order order);
     }
 }

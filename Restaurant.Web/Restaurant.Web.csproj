@@ -201,6 +201,7 @@
     <Compile Include="Mapping\WebProfile.cs" />
     <Compile Include="Models\Menu\DishesListModel.cs" />
     <Compile Include="Models\Menu\DishModel.cs" />
+    <Compile Include="Models\Order\NewOrderModel.cs" />
     <Compile Include="Models\Order\OrderDishesModel.cs" />
     <Compile Include="Models\Order\OrderModel.cs" />
     <Compile Include="Models\Order\OrdersListModel.cs" />
@@ -220,6 +221,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\addOrder.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

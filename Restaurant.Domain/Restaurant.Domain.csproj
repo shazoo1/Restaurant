@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Dish.cs" />
+    <Compile Include="Entities\OrderPart.cs" />
     <Compile Include="Enums\OrderState.cs" />
     <Compile Include="Enums\RoleName.cs" />
     <Compile Include="Identity\Entities\Role.cs" />

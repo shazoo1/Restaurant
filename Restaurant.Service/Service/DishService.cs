@@ -12,5 +12,11 @@ namespace Restaurant.Service.Service
     public class DishService : BaseService<Dish>, IDishService
     {
         public DishService(IUnitOfWork uow) : base(uow) { }
+
+        public List<Dish> GetDishesByIds(List<Guid> ids)
+        {
+            var repo = _uow.Get<Dish>();
+            return ((IEnumerable<Dish>)repo.GetAllWhere(x => ids.Contains(x.Id))).ToList();
+        }
     }
 }

@@ -32,6 +32,7 @@ namespace Restaurant.Persistence.Repositories
             {
                 DbSet.Add(item);
             }
+            Context.SaveChanges();
         }
 
         public void Add(IEnumerable<T> items)
@@ -51,12 +52,22 @@ namespace Restaurant.Persistence.Repositories
 
         public IQueryable<T> GetAllIncluding(params Expression<Func<T, bool>>[] includeProperties)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = GetAll();
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+            return query;
         }
 
         public IQueryable<T> GetAllWhere(params Expression<Func<T, bool>>[] predicates)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = GetAll();
+            foreach (var predicate in predicates)
+            {
+                query = query.Where(predicate);
+            }
+            return query;
         }
 
         public void Remove(Guid id)

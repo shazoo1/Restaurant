@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Restaurant.Domain.Entities;
 using Restaurant.Domain.Interfaces;
 using Restaurant.Service.Interfaces;
+using Microsoft.AspNet.Identity;
+using System.Security.Principal;
 
 namespace Restaurant.Service.Service
 {
@@ -13,9 +15,19 @@ namespace Restaurant.Service.Service
     {
         public OrderService(IUnitOfWork uow) : base(uow) { }
 
-        public List<Order> GetAll()
+        public void AddNewOrder(Order order)
         {
-            return ((IEnumerable<Order>)(_uow.Get<Order>().GetAll())).ToList<Order>();
+            order.CreatedAt = DateTime.Now;
+            order.LastModifiedAt = DateTime.Now;
+            order.State = Domain.Enums.OrderState.accepted;
+            var repo =_uow.Get<Order>();
+            repo.Add(order);
+        }
+
+        public new List<Order> GetAll()
+        {
+            var repo = _uow.Get<Order>();
+            return repo.GetAllIncluding(x => { return x.Dishes});
         }
     }
 }

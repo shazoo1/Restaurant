@@ -8,7 +8,7 @@ namespace Restaurant.Domain.Entities
 {
     public class OrderPart : BaseEntity
     {
-        public Dish Dish { get; set; }
+        public virtual Dish Dish { get; set; }
         public int Quantity { get; set; }
     }
 }

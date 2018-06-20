@@ -13,7 +13,7 @@ namespace Restaurant.Domain.Entities
         public int TableNumber { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime LastModifiedAt { get; set; }
-        public List<OrderPart> Dishes { get; set; }
+        public virtual List<OrderPart> Dishes { get; set; }
         public OrderState State { get; set; }
         public User Author { get; set; }
 

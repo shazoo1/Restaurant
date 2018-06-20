@@ -27,7 +27,7 @@ namespace Restaurant.Service.Service
         public new List<Order> GetAll()
         {
             var repo = _uow.Get<Order>();
-            return repo.GetAllIncluding(x => { return x.Dishes});
+            return ((IEnumerable<Order>)repo.GetAll()).ToList();
         }
     }
 }

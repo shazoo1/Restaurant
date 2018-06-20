@@ -11,6 +11,7 @@ using Restaurant.Web.Models.Order;
 
 namespace Restaurant.Web.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private IOrderService _orderService;

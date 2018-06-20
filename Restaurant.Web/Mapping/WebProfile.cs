@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using AutoMapper;
 using Restaurant.Domain.Entities;
+using Restaurant.Domain.Identity.Entities;
 using Restaurant.Web.Models.Menu;
 using Restaurant.Web.Models.Order;
+using Restaurant.Web.Models.Users;
 
 namespace Restaurant.Web.Mapping
 {
@@ -27,6 +29,13 @@ namespace Restaurant.Web.Mapping
                         return cost;
                     }));
             CreateMap<OrderModel, Order>();
+            CreateMap<User, UserModel>()
+                .ForMember(s => s.RoleId, opt=>opt.ResolveUsing(
+                    (user, userModel, i, context) => {
+                        return user.Roles.FirstOrDefault().RoleId;
+                    }
+                    ));
+            CreateMap<UserModel, User>();
         }
     }
 }

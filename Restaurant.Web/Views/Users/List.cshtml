@@ -1,0 +1,25 @@
+﻿@model Restaurant.Web.Models.Users.UsersViewModel
+@{
+    ViewBag.Title = "Пользователи";
+}
+
+<div class="jumbotron">
+    <h2>Пользователи</h2>
+</div>
+<div class="table">
+    <div class="row">
+        <div class="col-sm">Пользователь</div>
+        <div class="col-sm">E-Mail</div>
+        <div class="col-sm">Роль</div>
+    </div>
+
+    @foreach (var user in Model.Users)
+    {
+        <div class="row">
+            <div class="col-sm">@user.UserName</div>
+            <div class="col-sm">@user.Email</div>
+            <div class="col-sm">@user.Role</div>
+        </div>
+    }
+</div>
+

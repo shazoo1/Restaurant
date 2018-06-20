@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Restaurant.Domain.Entities;
 
 namespace Restaurant.Web.Models.Order
 {
@@ -15,5 +16,6 @@ namespace Restaurant.Web.Models.Order
         public DateTime LastModifiedAt { get; set; }
         public string OrderState { get; set; }
         public string UserName { get; set; }
+        public List<OrderPart> Dishes { get; set; }
     }
 }

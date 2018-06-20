@@ -11,23 +11,43 @@
 </div>
 
 <div class="row">
-    <table style="width:100%">
-        <tr>
-            <th>Номер столика</th>
-            <th>Сумма</th>
-            <th>Создан</th>
-            <th>Изменён</th>
-            <th>Статус</th>
-            <th>Официант</th>
-        </tr>
+    <div style="width:100%">
+        <div class="row">
+            <h5 class="col-sm">Номер столика</h5>
+            <h5 class="col-sm">Сумма</h5>
+            <h5 class="col-sm">Создан</h5>
+            <h5 class="col-sm">Изменён</h5>
+            <h5 class="col-sm">Статус</h5>
+            <h5 class="col-sm">Официант</h5>
+        </div>
         @foreach (var order in Model.OrdersList)
         {
-            <tr><td>@order.TableNumber</td>
-            <td>@order.Price</td>
-            <td>@order.CreatedAt</td>
-            <td>@order.LastModifiedAt</td>
-            <td>@order.OrderState</td>
-            <td>@order.UserName</td></tr>
-        }
-    </table>
+            <div class="row" data-toggle="collapse" data-target="#item@(order.Id)">
+                <p class="col-sm">@order.TableNumber</p>
+                <p class="col-sm">@order.Price</p>
+                <p class="col-sm">@order.CreatedAt</p>
+                <p class="col-sm">@order.LastModifiedAt</p>
+                <p class="col-sm">@order.OrderState</p>
+                <p class="col-sm">@order.UserName</p>
+            </div>
+            if (order.Dishes.Count > 0)
+            {
+            <div class="table collapse" id="item@(order.Id)">
+                <div class="row">
+                    <h6 class="col-sm">Блюдо</h6>
+                    <h6 class="col-sm">Цена</h6>
+                    <h6 class="col-sm">Количество</h6>
+                </div>
+                @foreach (var dishPart in order.Dishes)
+                {
+                <div class="row">
+                    <p class="col-sm">@dishPart.Dish.Name</p>
+                    <p class="col-sm">@dishPart.Dish.Price</p>
+                    <p class="col-sm">@dishPart.Quantity</p>
+                </div>
+                }
+            </div>
+                }
+            }
+    </div>
 </div>

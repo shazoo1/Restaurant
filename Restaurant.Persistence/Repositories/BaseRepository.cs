@@ -42,7 +42,9 @@ namespace Restaurant.Persistence.Repositories
 
         public T FindById(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = DbSet.Find(id);
+            if (entity != null) return entity;
+            return null;
         }
 
         public virtual IQueryable<T> GetAll()

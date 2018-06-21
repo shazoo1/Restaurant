@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Restaurant.Web.Models.Order.View.OrderListViewModel
+@{
     ViewBag.Title = "Заказы";
 }
 
@@ -18,10 +19,11 @@
             <h5 class="col-sm">Изменён</h5>
             <h5 class="col-sm">Статус</h5>
             <h5 class="col-sm">Официант</h5>
+            <h5 class="col-sm"></h5>
         </div>
         @foreach (var order in @Model.OrderList)
         {
-            Html.RenderPartial("~/Views/Order/Partial/OrderPartialModel", order);
+            Html.RenderPartial("~/Views/Orders/Partial/OrderPartialView.cshtml", order);
         }
     </div>
 </div>

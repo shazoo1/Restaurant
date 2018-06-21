@@ -16,12 +16,25 @@ namespace Restaurant.Web.Mapping
     {
         public WebProfile()
         {
-            CreateMap<Dish, DishModel>();
-            CreateMap<DishModel, Dish>();
+            CreateMap<Dish, DishMenuModel>();
+            CreateMap<DishMenuModel, Dish>();
+            CreateMap<Dish, DishOrderModel>();
+            CreateMap<DishOrderModel, Dish>();
+            CreateMap<OrderPart, OrderDishViewModel>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(s => s.Dish.Name))
+                .ForMember(d => d.Price, opt => opt.MapFrom(s => s.Dish.Price))
+                .ForMember(d => d.Quantity, opt => opt.MapFrom(s => s.Quantity));
             CreateMap<Order, OrderViewModel>()
+                 .ForMember(d => d.OrderHeader, opt => opt.ResolveUsing((Mapper.Map<Order>)))
+                 .ForMember(d => d.Dishes, opt => opt.ResolveUsing((order, viewModel, i, context) =>
+                    {
+                        return Mapper.Map<List<OrderDishViewModel>>(order.Dishes);
+                    }));
+            CreateMap<Order, OrderHeaderViewModel>()
                 .ForMember(d => d.OrderState, opt => opt.MapFrom(s => s.State))
                 .ForMember(d => d.Price,
-                    opt => opt.ResolveUsing((order, orderModel, i, context) => {
+                    opt => opt.ResolveUsing((order, orderModel, i, context) =>
+                    {
                         double cost = 0;
                         order.Dishes.ForEach(x =>
                         {

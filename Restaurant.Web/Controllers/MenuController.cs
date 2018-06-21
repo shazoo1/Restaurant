@@ -24,7 +24,7 @@ namespace Restaurant.Web.Controllers
         public ActionResult Index()
         {
             var dishesListModel = new DishesListModel();
-            dishesListModel.Dishes = Mapper.Map<List<DishModel>>(_dishService.GetAll());
+            dishesListModel.Dishes = Mapper.Map<List<DishMenuModel>>(_dishService.GetAll());
             return View(dishesListModel);
         }
 
@@ -34,7 +34,7 @@ namespace Restaurant.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(DishModel dish)
+        public ActionResult Create(DishMenuModel dish)
         {
             _dishService.Add(new Dish { Name = dish.Name, Price = dish.Price, Description = dish.Description });
             return Json(Url.Action("Index"));

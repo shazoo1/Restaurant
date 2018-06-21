@@ -1,0 +1,17 @@
+﻿@model Restaurant.Web.Models.Order.View.OrderHeaderViewModel
+
+<div class="row" data-toggle="collapse" data-target="#item@(Model.Id)">
+    <p class="col-sm">@Model.TableNumber</p>
+    <p class="col-sm">@Model.Price</p>
+    <p class="col-sm">@Model.CreatedAt</p>
+    <p class="col-sm">@Model.LastModifiedAt</p>
+    <p class="col-sm">@Model.OrderState</p>
+    <p class="col-sm">@Model.UserName</p>
+    @if (Model.IsWaiter && Model.OrderState == "accepted")
+    {
+        using (Html.BeginForm("Amend", "Orders", FormMethod.Post, new {@class="col-sm", @style = "z-index:100" }))
+        {
+            <input type="submit" value="Изменить" />
+        }
+    }
+</div>

@@ -7,6 +7,6 @@ namespace Restaurant.Web.Models.Menu
 {
     public class DishesListModel
     {
-        public List<DishModel> Dishes { get; set; }
+        public List<DishMenuModel> Dishes { get; set; }
     }
 }

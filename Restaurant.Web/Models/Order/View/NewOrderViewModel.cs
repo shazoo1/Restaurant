@@ -6,9 +6,8 @@ using Restaurant.Domain.Entities;
 
 namespace Restaurant.Web.Models.Order.View
 {
-    public class OrderViewModel
+    public class NewOrderViewModel
     {
-        public OrderHeaderViewModel OrderHeader { get; set; }
-        public List<OrderDishViewModel> Dishes { get; set; }
+        public List<DishOrderModel> Dishes { get; set; } = new List<DishOrderModel>();
     }
 }

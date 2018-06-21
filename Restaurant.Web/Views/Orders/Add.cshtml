@@ -31,7 +31,7 @@
 <script src="~/Scripts/addOrder.js" type="text/javascript">
 </script>
 <script>
-var unselected = @Html.Raw(Json.Encode(Model.Unselected));
+var unselected = @Html.Raw(Json.Encode(Model.Dishes));
 var selected = [];
     fillUnselectedList();
     document.getElementById('send').addEventListener('click', function () {

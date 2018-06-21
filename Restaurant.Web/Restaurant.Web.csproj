@@ -219,9 +219,12 @@
     <Compile Include="Mapping\WebProfile.cs" />
     <Compile Include="Models\Login\LoginModel.cs" />
     <Compile Include="Models\Menu\DishesListModel.cs" />
-    <Compile Include="Models\Menu\DishModel.cs" />
+    <Compile Include="Models\Menu\DishMenuModel.cs" />
+    <Compile Include="Models\Order\DishOrderModel.cs" />
     <Compile Include="Models\Order\NewOrderModel.cs" />
-    <Compile Include="Models\Order\OrderDishesModel.cs" />
+    <Compile Include="Models\Order\View\NewOrderViewModel.cs" />
+    <Compile Include="Models\Order\View\OrderDishViewModel.cs" />
+    <Compile Include="Models\Order\View\OrderHeadViewModel.cs" />
     <Compile Include="Models\Order\View\OrderViewModel.cs" />
     <Compile Include="Models\Order\View\OrderListViewModel.cs" />
     <Compile Include="Models\Users\View\NewUserViewModel.cs" />
@@ -315,6 +318,9 @@
     <Content Include="Views\Users\List.cshtml" />
     <Content Include="Views\Users\Partial\CreateUserPartialView.cshtml" />
     <Content Include="Views\Orders\Partial\OrderPartialView.cshtml" />
+    <Content Include="Views\Orders\Partial\OrderDishPartialView.cshtml" />
+    <Content Include="Views\Orders\Partial\OrderHeaderPartialView.cshtml" />
+    <Content Include="Views\Orders\Amend.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

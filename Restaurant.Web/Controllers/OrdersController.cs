@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Restaurant.Domain.Entities;
+using Restaurant.Domain.Enums;
 using Restaurant.Service.Interfaces;
 using Restaurant.Web.Models.Menu;
 using Restaurant.Web.Models.Order;
@@ -29,13 +30,18 @@ namespace Restaurant.Web.Controllers
             var dbdata = _orderService.GetAll();
             var model = new OrderListViewModel();
             model.OrderList = Mapper.Map<List<OrderViewModel>>(_orderService.GetAll());
+            //TODO :: Remove admin role clause
+            if (User.IsInRole(RoleName.Admin) || User.IsInRole(RoleName.Waiter))
+            {
+                model.OrderList.ForEach(x => x.OrderHeader.IsWaiter = true);
+            }
             return View(model);
         }
 
         public ActionResult Add()
         {
-            var model = new OrderDishesModel();
-            model.Unselected = _dishService.GetAll();
+            var model = new NewOrderViewModel();
+            model.Dishes = Mapper.Map<List<DishOrderModel>>(_dishService.GetAll());
             return View(model);
         }
 
@@ -54,6 +60,13 @@ namespace Restaurant.Web.Controllers
             });
             _orderService.AddNewOrder(newOrder);
             return new RedirectResult("/Orders/Index");
+        }
+
+        public ActionResult Amend(OrderHeaderViewModel order)
+        {
+            var model = new OrderViewModel();
+            model = Mapper.Map<OrderViewModel>(_orderService.GetById(order.Id));
+            return View(model);
         }
     }
 }

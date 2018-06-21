@@ -8,6 +8,7 @@ using Restaurant.Domain.Entities;
 using Restaurant.Service.Interfaces;
 using Restaurant.Web.Models.Menu;
 using Restaurant.Web.Models.Order;
+using Restaurant.Web.Models.Order.View;
 
 namespace Restaurant.Web.Controllers
 {
@@ -26,8 +27,8 @@ namespace Restaurant.Web.Controllers
         public ActionResult Index()
         {
             var dbdata = _orderService.GetAll();
-            var model = new OrdersListModel();
-            model.OrdersList = Mapper.Map<List<OrderModel>>(_orderService.GetAll());
+            var model = new OrderListViewModel();
+            model.OrderList = Mapper.Map<List<OrderViewModel>>(_orderService.GetAll());
             return View(model);
         }
 

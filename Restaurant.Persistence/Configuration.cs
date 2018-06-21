@@ -36,24 +36,24 @@ namespace Restaurant.Persistence
                 }
             });
 
-            var superUser = new User
+            var superUser = userManager.FindByName("admin");
+            if (superUser == null)
             {
-                Id = new Guid("1ABB568A-2ECD-43E6-B814-BE164CF2F6F4"),
-                Email = "admin@admin.com",
-                UserName = "admin"
-            };
-            var adminPassword = "AdminPassword";
-
-            if(userManager.FindByName(superUser.UserName) == null)
-            {
+                superUser = new User
+                {
+                    Id = new Guid("1ABB568A-2ECD-43E6-B814-BE164CF2F6F4"),
+                    Email = "admin@admin.com",
+                    UserName = "admin",
+                };
+                var adminPassword = "AdminPassword";
                 userManager.Create(superUser, adminPassword);
                 userManager.SetLockoutEnabled(superUser.Id, false);
             }
+            
             var adminRole = RoleName.Admin;
             var rolesForUser = userManager.GetRoles(superUser.Id);
             if (!rolesForUser.Contains(adminRole))
                 userManager.AddToRole(superUser.Id, RoleName.Admin);
-
             base.Seed(context);
         }
     }

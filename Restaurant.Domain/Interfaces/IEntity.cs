@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Domain.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IEntity
     {
-        IRepository<T> Get<T>() where T : IEntity;
-        Task<int> SaveChangesAsync();
-        int SaveChanges();
+        Guid Id { get; set; }
     }
 }

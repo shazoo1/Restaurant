@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Restaurant.Domain.Entities;
+using Restaurant.Domain.Interfaces;
 
 namespace Restaurant.Service.Interfaces
 {
-    public interface IBaseService<T> where T : BaseEntity
+    public interface IBaseService<T> where T : IEntity
     {
         List<T> GetAll();
         T GetById(Guid id);

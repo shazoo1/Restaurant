@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using Restaurant.Domain.Entities;
 
-namespace Restaurant.Web.Models.Order
+namespace Restaurant.Web.Models.Order.View
 {
-    public class OrderModel
+    public class OrderViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

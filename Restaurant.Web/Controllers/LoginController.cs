@@ -37,5 +37,11 @@ namespace Restaurant.Web.Controllers
                     }
             }
         }
+
+        public ActionResult Logout()
+        {
+            SignInManager.AuthenticationManager.SignOut();
+            return RedirectToAction("Index", "Login");
+        }
     }
 }

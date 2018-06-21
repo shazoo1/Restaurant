@@ -30,7 +30,7 @@ namespace Restaurant.Persistence
             return _context.SaveChangesAsync();
         }
 
-        public IRepository<T> Get<T>() where T : class
+        public IRepository<T> Get<T>() where T : IEntity
         {
             if (_repositories.ContainsKey(typeof(T)))
                 return _repositories[typeof(T)] as IRepository<T>;

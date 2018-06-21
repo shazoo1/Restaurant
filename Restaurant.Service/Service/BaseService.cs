@@ -9,7 +9,7 @@ using Restaurant.Service.Interfaces;
 
 namespace Restaurant.Service.Service
 {
-    public class BaseService<T> : IBaseService<T> where T : BaseEntity
+    public class BaseService<T> : IBaseService<T> where T : IEntity
     {
         protected readonly IUnitOfWork _uow;
         protected BaseService(IUnitOfWork uow)

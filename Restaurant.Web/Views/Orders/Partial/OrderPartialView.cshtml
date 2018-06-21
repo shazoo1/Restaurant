@@ -1,0 +1,28 @@
+﻿@model Restaurant.Web.Models.Order.View.OrderViewModel
+
+<div class="row" data-toggle="collapse" data-target="#item@(Model.Id)">
+    <p class="col-sm">@Model.TableNumber</p>
+    <p class="col-sm">@Model.Price</p>
+    <p class="col-sm">@Model.CreatedAt</p>
+    <p class="col-sm">@Model.LastModifiedAt</p>
+    <p class="col-sm">@Model.OrderState</p>
+    <p class="col-sm">@Model.UserName</p>
+</div>
+            if (@Model.Dishes.Count > 0)
+            {
+<div class="table collapse" id="item@(Model.Id)">
+    <div class="row">
+        <h6 class="col-sm">Блюдо</h6>
+        <h6 class="col-sm">Цена</h6>
+        <h6 class="col-sm">Количество</h6>
+    </div>
+    @foreach (var dishPart in Model.Dishes)
+    {
+        <div class="row">
+            <p class="col-sm">@dishPart.Dish.Name</p>
+            <p class="col-sm">@dishPart.Dish.Price</p>
+            <p class="col-sm">@dishPart.Quantity</p>
+        </div>
+    }
+</div>
+}

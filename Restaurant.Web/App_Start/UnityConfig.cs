@@ -46,6 +46,7 @@ namespace Restaurant.Web
             //TODO :: Register services
             container.RegisterType<IOrderService, OrderService>();
             container.RegisterType<IDishService, DishService>();
+            container.RegisterType<IUserService, UserService>();
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();

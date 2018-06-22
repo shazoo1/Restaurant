@@ -8,6 +8,7 @@ using Restaurant.Domain.Entities;
 using Restaurant.Domain.Enums;
 using Restaurant.Service.Interfaces;
 using Restaurant.Web.Models.Menu;
+using Restaurant.Web.Models.Menu.View;
 
 namespace Restaurant.Web.Controllers
 {
@@ -34,10 +35,10 @@ namespace Restaurant.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(DishMenuModel dish)
+        public ActionResult Create(NewDishViewModel dish)
         {
-            _dishService.Add(new Dish { Name = dish.Name, Price = dish.Price, Description = dish.Description });
-            return Json(Url.Action("Index"));
+            _dishService.Add(Mapper.Map<Dish>(dish));
+            return RedirectToAction("Index", "Menu");
         }
     }
 }

@@ -1,25 +1,18 @@
-﻿@model Restaurant.Web.Models.Menu.DishModel
+﻿@model Restaurant.Web.Models.Menu.View.NewDishViewModel
 @{
     ViewBag.Title = "Добавить";
 }
-
-<h2>Добавить</h2>
-<p>Название</p>
-@Html.TextBoxFor(model => model.Name, new { id = "idName"})
-<p>Цена</p>
-@Html.TextBoxFor(model => model.Price, new {id = "idPrice", type="number", step=".01", min="0"})
-<p>Описание</p>
-@Html.TextAreaFor(model => model.Description, new { id = "idDescription"})
-<input type="button" id="addDish" value="Добавить"/>
-<script>
-        document.getElementById('addDish').addEventListener('click', function () {
-            
-            var name = $("#idName").val();
-            var price = $("#idPrice").val();
-            var description = $("#idDescription").val();
-            var jsModel = { Name: name, Price: price, Description: description };
-            $.post('@(Url.Action("Create", "Menu"))', { dish: jsModel }, function (data) {
-                window.location.href = data;
-            });
-        })
-</script>
+<div class="jumbotron">
+    <h2>Добавить блюдо</h2>
+</div>
+@using (Html.BeginForm("Create", "Menu", FormMethod.Post))
+{
+    <p>Название</p>
+    @Html.TextBoxFor(model => model.Name);
+    <p>Цена</p>
+    @Html.TextBoxFor(model => model.Price);
+    <p>Описание</p>
+    @Html.TextAreaFor(model => model.Name);
+    <br/>
+    <input type="submit" value="Добавить"/>
+}

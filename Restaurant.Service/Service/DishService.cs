@@ -13,10 +13,18 @@ namespace Restaurant.Service.Service
     {
         public DishService(IUnitOfWork uow) : base(uow) { }
 
+        public List<Dish> GetAllBut(IEnumerable<Guid> ids)
+        {
+            var repo = _uow.Get<Dish>();
+            return ((IEnumerable<Dish>)repo
+                .GetAllWhere(x => !ids.Contains(x.Id))).ToList();
+        }
+
         public List<Dish> GetDishesByIds(List<Guid> ids)
         {
             var repo = _uow.Get<Dish>();
-            return ((IEnumerable<Dish>)repo.GetAllWhere(x => ids.Contains(x.Id))).ToList();
+            return ((IEnumerable<Dish>)repo
+                .GetAllWhere(x => ids.Contains(x.Id))).ToList();
         }
     }
 }

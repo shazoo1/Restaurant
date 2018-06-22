@@ -15,7 +15,7 @@ namespace Restaurant.Domain.Entities
         public DateTime LastModifiedAt { get; set; }
         public virtual List<OrderPart> Dishes { get; set; }
         public OrderState State { get; set; }
-        public User Author { get; set; }
+        public string Author { get; set; }
 
     }
 }

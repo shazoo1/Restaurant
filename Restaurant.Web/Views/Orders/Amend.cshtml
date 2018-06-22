@@ -6,9 +6,77 @@
 <div class="jumbotron">
     <h2>Изменить заказ</h2>
 </div>
-<div class="col-md-4">
-    <div style="display:block">
-        <p>Столик: @Model.OrderHeader.TableNumber</p>
+<div class="row">
+    @{Html.RenderPartial("~/Views/Orders/Partial/AmendOrderHeaderPartialView.cshtml", Model.OrderHeader);}
+    <div class="col-md-8" style="display:inline">
+        <h3 style="text-align:center">Блюда</h3>
+        <div class="table" id="dishes">
+            <div class="row">
+                <h5 class="col-sm">Блюдо</h5>
+                <h5 class="col-sm">Количество</h5>
+                <h5 class="col-sm">Стоимость</h5>
+            </div>
+            @foreach (var dish in Model.Dishes)
+            {
+                Html.RenderPartial("~/Views/Orders/Partial/OrderDishPartialView.cshtml", dish);
+            }
+        </div>
     </div>
 </div>
-
+<div>
+    <h5>Доступные действия</h5>
+    @if (Model.IsCook)
+    {
+        using (Html.BeginForm("SetCooked", "Orders", FormMethod.Post))
+        {
+            <input type="hidden" name="id" value="@Model.OrderHeader.Id" />
+            <input type="submit" value="Отметить готовым" />
+        }
+    }
+    else if (Model.IsWaiter)
+    {
+        if (Model.OrderHeader.OrderState == "ready")
+        {
+            using (Html.BeginForm("SetServed", "Orders", FormMethod.Post))
+            {
+                <input type="hidden" name="id" value="@Model.OrderHeader.Id" />
+                <input type="submit" value="Отметить поданным" />
+            }
+            using (Html.BeginForm("SetPaid", "Orders", FormMethod.Post))
+            {
+                <input type="hidden" name="id" value="@Model.OrderHeader.Id" />
+                <input type="submit" value="Отметить оплаченным" />
+            }
+        }
+        if (Model.OrderHeader.OrderState == "accepted")
+        {
+            <input type="button" value="Добавить блюдо" data-toggle="collapse" data-target="#addDishMenu" />
+            <div class="table collapse" id="addDishMenu" style="width: 50%">
+                <div class="row">
+                    <h6 class="col-sm">Название</h6>
+                    <h6 class="col-sm">Цена</h6>
+                    <h6 class="col-sm">Описание</h6>
+                </div>
+            </div>
+            <script>
+                window.onload = function () {
+                var unselected = @Html.Raw(Json.Encode(Model.OtherDishes));
+                var selected = [];
+                for (var i = 0; i < unselected.length; i++) {
+                    var nameCell = '<p class="col-sm">' + unselected[i].Name + '</p>';
+                    var priceCell = '<p class="col-sm">' + unselected[i].Price + '</p>';
+                    var descCell = '<p class="col-sm">' + unselected[i].Description + '</p>';
+                    var counter = '<input id="count" class="col-sm" type="number" step="1" min="1"/>';
+                    var parser = new DOMParser();
+                    var row = parser.parseFromString('<div id="' + unselected.Id + '" class="row">'
+                        + nameCell + priceCell + descCell + counter + '</div>', 'text/html');
+                    document.getElementById('addDishMenu').appendChild(row.documentElement);
+                }};
+            </script>
+        }
+    }
+    else
+    {
+        <p>Для этого заказа нет доступных действий.</p>
+    }
+</div>

@@ -9,10 +9,11 @@ using AutoMapper;
 using Restaurant.Service.Interfaces;
 using System.Threading.Tasks;
 using Restaurant.Web.Models.Users.View;
+using Restaurant.Domain.Enums;
 
 namespace Restaurant.Web.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = RoleName.Admin)]
     public class UsersController : BaseController
     {
         private UsersViewModel _model = new UsersViewModel();
@@ -33,6 +34,7 @@ namespace Restaurant.Web.Controllers
         public async Task<ActionResult> Create(NewUserViewModel newUserViewModel)
         {
             var user = Mapper.Map<User>(newUserViewModel.NewUser);
+            user.Id = Guid.NewGuid();
             await UserManager.CreateAsync(user, newUserViewModel.NewUser.Password);
             user = await UserManager.FindByNameAsync(user.UserName);
             var userRole = await RoleManager.FindByIdAsync(newUserViewModel.SelectedUserRoleId);

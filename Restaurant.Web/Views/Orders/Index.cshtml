@@ -13,13 +13,13 @@
 <div class="row">
     <div style="width:100%">
         <div class="row">
-            <h5 class="col-sm">Номер столика</h5>
-            <h5 class="col-sm">Сумма</h5>
-            <h5 class="col-sm">Создан</h5>
-            <h5 class="col-sm">Изменён</h5>
-            <h5 class="col-sm">Статус</h5>
-            <h5 class="col-sm">Официант</h5>
-            <h5 class="col-sm"></h5>
+            @Html.Label("Номер столика", new { @class = "col-sm" })
+            @Html.Label("К оплате", new { @class = "col-sm" })
+            @Html.Label("Создан", new { @class = "col-sm" })
+            @Html.Label("Изменён", new { @class = "col-sm" })
+            @Html.Label("Статус", new { @class = "col-sm" })
+            @Html.Label("Официант", new { @class = "col-sm" })
+            @Html.Label("Действия", new { @class = "col-sm" })
         </div>
         @foreach (var order in @Model.OrderList)
         {

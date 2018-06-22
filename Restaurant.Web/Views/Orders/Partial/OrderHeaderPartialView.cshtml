@@ -1,17 +1,28 @@
 ﻿@model Restaurant.Web.Models.Order.View.OrderHeaderViewModel
 
-<div class="row" data-toggle="collapse" data-target="#item@(Model.Id)">
-    <p class="col-sm">@Model.TableNumber</p>
-    <p class="col-sm">@Model.Price</p>
-    <p class="col-sm">@Model.CreatedAt</p>
-    <p class="col-sm">@Model.LastModifiedAt</p>
-    <p class="col-sm">@Model.OrderState</p>
-    <p class="col-sm">@Model.UserName</p>
-    @if (Model.IsWaiter && Model.OrderState == "accepted")
+
+@using (Html.BeginForm("Amend", "Orders", FormMethod.Post,
+    new
     {
-        using (Html.BeginForm("Amend", "Orders", FormMethod.Post, new {@class="col-sm", @style = "z-index:100" }))
-        {
-            <input type="submit" value="Изменить" />
-        }
-    }
-</div>
+        @class = "row",
+        @data_toggle = "collapse",
+        @data_target = "#item" + @Model.Id
+    }))
+{
+    @Html.LabelForModel(Model.TableNumber.ToString(), new { @class = "col-sm" })
+    @Html.LabelForModel(Model.Price.ToString(), new { @class = "col-sm" })
+    @Html.LabelForModel(Model.CreatedAt.ToString(), new { @class = "col-sm" })
+    @Html.LabelForModel(Model.LastModifiedAt.ToString(), new { @class = "col-sm" })
+    @Html.LabelForModel(Model.OrderState, new { @class = "col-sm" })
+    @Html.LabelForModel(Model.UserName, new { @class = "col-sm" })
+    //Hidden inputs for data sending
+    <input type="hidden" name="tableNumber" value="@Model.TableNumber" />
+    <input type="hidden" name ="price" value="@Model.Price" />
+    <input type="hidden" name="createdAt" value="@Model.CreatedAt" />
+    <input type="hidden" name="lastModifiedAt" value="@Model.LastModifiedAt" />
+    <input type="hidden" name="orderState" value="@Model.OrderState" />
+    <input type="hidden" name="userName" value="@Model.UserName" />
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <input type="submit" value="Изменить" class="col-sm" />
+}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects.DataClasses;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
@@ -89,7 +90,12 @@ namespace Restaurant.Persistence.Repositories
 
         public void Update(T item)
         {
-            throw new NotImplementedException();
+            DbEntityEntry dbEntityEntry = Context.Entry(item);
+            if (dbEntityEntry.State == EntityState.Detached)
+            {
+                DbSet.Attach(item);
+            }
+            dbEntityEntry.State = EntityState.Modified;
         }
     }
 }

@@ -1,0 +1,32 @@
+﻿@model Restaurant.Web.Models.Order.View.OrderHeaderViewModel
+<div class="col-md-4">
+    <h4 style="text-align:center">Заказ №</h4>
+    @Html.LabelForModel(Model.Id.ToString())
+    <br />
+    <br />
+    <div>
+        <h6 style="display:inline">Номер стола: </h6>
+        @Html.LabelForModel(Model.TableNumber.ToString())
+    </div>
+    <div>
+        <h6 style="display:inline">Официант: </h6>
+        @Html.LabelForModel(Model.UserName)
+    </div>
+    <div>
+        <h6 style="display:inline">Создан: </h6>
+        @Html.LabelForModel(Model.CreatedAt.ToString())
+    </div>
+    <div>
+        <h6 style="display:inline">Изменён: </h6>
+        @Html.LabelForModel(Model.LastModifiedAt.ToString())
+    </div>
+    <div>
+        <h6 style="display:inline">Статус: </h6>
+        @Html.LabelForModel(Model.OrderState)
+    </div>
+    <div>
+        <h6 style="display:inline">Счёт: </h6>
+        @Html.LabelForModel(Model.Price.ToString())
+    </div>
+    @Html.LabelForModel(Model.Price)
+</div>

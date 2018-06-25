@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
@@ -26,7 +27,7 @@ namespace Restaurant.Web.Controllers
             _dishService = dishService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(DateTime? filterDate, int? filterTableNumber, OrderState? filterState)
         {
             var dbdata = _orderService.GetAll();
             var model = new OrderListViewModel();
@@ -47,18 +48,18 @@ namespace Restaurant.Web.Controllers
         {
             var newOrder = new Order();
             newOrder.TableNumber = tableNumber;
-            var dishesIds = order.Select(x => x.Id).ToList();
+            var dishesIds = order.Select(x => x.Dish.Id).ToList();
             var orderedDishes = _dishService.GetDishesByIds(dishesIds);
-            newOrder.Dishes = new List<OrderPart>();
+            newOrder.OrderParts = new List<OrderPart>();
             order.ForEach(x => {
-                newOrder.Dishes.Add(new OrderPart {
-                    Dish = orderedDishes.Where(z => z.Id == x.Id).First(),
+                newOrder.OrderParts.Add(new OrderPart {
+                    Dish = orderedDishes.Where(z => z.Id == x.Dish.Id).First(),
                     Quantity = x.Quantity
                 });
             });
             newOrder.Author = User.Identity.Name;
             _orderService.AddNewOrder(newOrder);
-            return RedirectToAction("Index");
+            return Json(Url.Action("Index", "Orders"));
         }
 
         [HttpPost]
@@ -70,7 +71,7 @@ namespace Restaurant.Web.Controllers
             }
             var model = new OrderViewModel();
             model = Mapper.Map<OrderViewModel>(_orderService.GetById(orderHeaderViewModel.Id));
-            model.OtherDishes = (Mapper.Map<List<DishMenuModel>>
+            model.OtherDishes = (Mapper.Map<List<DishOrderModel>>
                 (_dishService.GetAll()));
             if (User.IsInRole(RoleName.Cook))
             {
@@ -102,6 +103,14 @@ namespace Restaurant.Web.Controllers
         {
             UpdateWithState(id, OrderState.paid);
             return RedirectToAction("Index", "Orders");
+        }
+
+        [HttpPost]
+        public ActionResult Change(List<NewOrderModel> dishes, Guid orderId)
+        {
+            _orderService.UpdateWithDishes(Mapper.Map<List<OrderPart>>(dishes),
+                orderId);
+            return Json(Url.Action("Index", "Orders"));
         }
 
         private void UpdateWithState(Guid id, OrderState state)

@@ -9,6 +9,7 @@ using Restaurant.Service.Interfaces;
 using Microsoft.AspNet.Identity;
 using System.Security.Principal;
 using Restaurant.Domain.Enums;
+using Restaurant.Persistence.Repositories;
 
 namespace Restaurant.Service.Service
 {
@@ -45,6 +46,37 @@ namespace Restaurant.Service.Service
             if (user.IsInRole(RoleName.Cook))
                 return GetAllWithStates(new OrderState[] { OrderState.accepted });
             return null;
+        }
+
+        public new void Update(Order order)
+        {
+            order.LastModifiedAt = DateTime.Now;
+            var repo = _uow.Get<Order>();
+            repo.Update(order);
+        }
+
+        public void UpdateWithDishes(List<OrderPart> orderParts, Guid orderId)
+        {
+            var ordersRepo = _uow.Get<Order>();
+            var dishesRepo = _uow.Get<Dish>();
+            var order = ordersRepo.GetAllWhere(x => x.Id == orderId)
+                .FirstOrDefault();
+            orderParts.ForEach(x =>
+            {
+                x.Dish = dishesRepo.FindById(x.Dish.Id);
+                var dbOrderPart = order.OrderParts
+                    .Where(y => y.Dish.Id == x.Dish.Id)
+                    .FirstOrDefault();
+                if (dbOrderPart != null)
+                {
+                    dbOrderPart.Quantity += x.Quantity;
+                }
+                else
+                {
+                    order.OrderParts.Add(x);
+                }
+            });
+            ordersRepo.Update(order);
         }
     }
 }

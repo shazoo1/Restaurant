@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Restaurant.Domain.Entities;
 using Restaurant.Domain.Interfaces;
 using Restaurant.Persistence.Repositories;
 
@@ -33,8 +34,10 @@ namespace Restaurant.Persistence
         public IRepository<T> Get<T>() where T : IEntity
         {
             if (_repositories.ContainsKey(typeof(T)))
-                return _repositories[typeof(T)] as IRepository<T>;
+                    return _repositories[typeof(T)] as IRepository<T>;
             var repoType = typeof(BaseRepository<>).MakeGenericType(typeof(T));
+            if (typeof(T) == typeof(Order))
+                repoType = typeof(OrderRepository);
             var repo = (IRepository<T>)Activator.CreateInstance(repoType, _context);
             _repositories.Add(typeof(T), repo);
             return repo;

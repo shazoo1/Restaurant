@@ -13,5 +13,7 @@ namespace Restaurant.Service.Interfaces
         List<Order> GetAll();
         void AddNewOrder(Order order);
         IEnumerable<Order> GetAllForUser(IPrincipal user);
+        new void Update(Order order);
+        void UpdateWithDishes(List<OrderPart> orderParts, Guid orderId);
     }
 }

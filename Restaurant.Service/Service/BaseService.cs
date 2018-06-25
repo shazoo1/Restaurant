@@ -20,7 +20,8 @@ namespace Restaurant.Service.Service
         public List<T> GetAll()
         {
             var items = _uow.Get<T>().GetAll();
-            return ((IEnumerable<T>)items).ToList();
+            var itemsList = ((IEnumerable<T>)items).ToList();
+            return itemsList;
         }
 
         public T Add(T item)

@@ -30,7 +30,7 @@ namespace Restaurant.Web.Mapping
                  .ForMember(d => d.OrderHeader, opt => opt.ResolveUsing((Mapper.Map<Order>)))
                  .ForMember(d => d.Dishes, opt => opt.ResolveUsing((order, viewModel, i, context) =>
                     {
-                        return Mapper.Map<List<OrderDishViewModel>>(order.Dishes);
+                        return Mapper.Map<List<OrderDishViewModel>>(order.OrderParts);
                     }));
             CreateMap<Order, OrderHeaderViewModel>()
                 .ForMember(d => d.OrderState, opt => opt.MapFrom(s => s.State))
@@ -38,7 +38,7 @@ namespace Restaurant.Web.Mapping
                     opt => opt.ResolveUsing((order, orderModel, i, context) =>
                     {
                         double cost = 0;
-                        order.Dishes.ForEach(x =>
+                        order.OrderParts.ForEach(x =>
                         {
                             cost += x.Dish.Price * x.Quantity;
                         });
@@ -52,6 +52,8 @@ namespace Restaurant.Web.Mapping
                 .ForMember(d => d.UserName, opt => opt.MapFrom(s => s.user.UserName))
                 .ForMember(d => d.Email, opt => opt.MapFrom(s => s.user.Email));
             CreateMap<NewDishViewModel, Dish>();
+            CreateMap<NewOrderModel, OrderPart>()
+                .ForMember(d => d.Dish, opt => opt.MapFrom(s => s.Dish));
         }
     }
 }

@@ -96,6 +96,7 @@ namespace Restaurant.Persistence.Repositories
                 DbSet.Attach(item);
             }
             dbEntityEntry.State = EntityState.Modified;
+            Context.SaveChanges();
         }
     }
 }

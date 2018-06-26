@@ -9,36 +9,32 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<body style="background-color:#DDDDDD">
+    <div class="page-container">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <nav class="navbar navbar-expand-sm">
+                <a class="navbar-brand" href="@Url.Action("Index", "Orders")">
+                    Sibers
+                </a>
+                <ul class="navbar-nav navbar-collapse">
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("List", "Menu")">Меню</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Orders")">Заказы</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("index", "Users")">Пользователи</a></li>
                 </ul>
-            </div>
-            @Html.ActionLink("Выйти из себя", "Logout", "Login", null, new { @style="align:right"})
+                @Html.ActionLink("Выйти из себя", "Logout", "Login", null, new { @style = "align:right" })
+            </nav>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Ресторан</p>
-        </footer>
-    </div>
+            <div class="container body-content" style="background-color:#FFFFFF">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Ресторан</p>
+                </footer>
+            </div>
 
-    
-    @RenderSection("scripts", required: false)
+
+            @RenderSection("scripts", required: false)
+        
+    </div>
 </body>
 </html>

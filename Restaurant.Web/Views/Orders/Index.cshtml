@@ -3,41 +3,60 @@
     ViewBag.Title = "Заказы";
 }
 
-<div class="jumbotron">
-    <h1>Список заказов</h1>
-    @using (Html.BeginForm("Add", "Order"))
-    {
-        <input type="submit" value="Добавить" formaction=@Url.Action("Add") formmethod="get" />
-    }
+<div class="jumbotron" style="background-image:url(../../Content/images/orders-background.jpg)">
+    <div class="highlighter">
+        <h1>Список заказов</h1>
+        @using (Html.BeginForm("Add", "Order"))
+        {
+            <input type="submit" value="Новый заказ" formaction=@Url.Action("Add") formmethod="get" class="btn btn-warning"/>
+        }
+    </div>
 </div>
-@using (Html.BeginForm("Index", "Orders", FormMethod.Get))
+@using (Html.BeginForm("Index", "Orders", FormMethod.Get,
+    new { @class = "form-inline div-table-filter" }))
 {
-    <h6>Фильтр</h6>
-    <p>Столик:</p>
-    @Html.TextBoxFor(m => m.FilterTableNumber, new { @type = "number", @min = "1", @step = "1" });
-    <p>Дата:</p>
-    @Html.EditorFor(m => m.FilterDate, new { @type = "date" });
+    @Html.LabelFor(m => m.FilterTableNumber)
+    @Html.TextBoxFor(m => m.FilterTableNumber, new { @class = "form-control", @type = "number", @min = "1", @step = "1" })
+
+    @Html.LabelFor(m => m.FilterDate)
+    @Html.TextBoxFor(m => m.FilterDate, new { @class="form-control", @type="date"})
+
     if (Model.IsAdmin || Model.IsWaiter)
     {
-        <p>Статус:</p>
-        @Html.EnumDropDownListFor(m => m.FilterState);
+        @Html.LabelFor(m => m.FilterState);
+        @Html.EnumDropDownListFor(m => m.FilterState, new { @class = "form-control" })
     }
-    <input type="submit" value="Фильтр"/>
+    <input type="submit" value="Фильтр" />
 }
-<div class="row">
-    <div style="width:100%">
-        <div class="row">
-            @Html.Label("Номер столика", new { @class = "col-sm" })
-            @Html.Label("К оплате", new { @class = "col-sm" })
-            @Html.Label("Создан", new { @class = "col-sm" })
-            @Html.Label("Изменён", new { @class = "col-sm" })
-            @Html.Label("Статус", new { @class = "col-sm" })
-            @Html.Label("Официант", new { @class = "col-sm" })
-            @Html.Label("Действия", new { @class = "col-sm" })
+<div class="table" style="width:100%">
+        <div class="div-table-head row">
+            <div class="col d-flex align-items-center">@Html.Label("Номер столика", new { @class= "d-flex align-items-center" })</div>
+            <div class="col d-flex align-items-center">@Html.Label("К оплате", new { @class = "d-flex align-items-center" })</div>
+            <div class="col d-flex align-items-center">@Html.Label("Создан", new { @class = "d-flex align-items-center" })</div>
+            <div class="col d-flex align-items-center">@Html.Label("Изменён", new { @class = "d-flex align-items-center" })</div>
+            <div class="col d-flex align-items-center">@Html.Label("Статус", new { @class = "d-flex align-items-center" })</div>
+            <div class="col d-flex align-items-center">@Html.Label("Официант", new { @class = "d-flex align-items-center" })</div>
+            <div class="col d-flex align-items-center">@Html.Label("Действия", new { @class = "d-flex align-items-center" })</div>
         </div>
         @foreach (var order in @Model.OrderList)
         {
             Html.RenderPartial("~/Views/Orders/Partial/OrderPartialView.cshtml", order);
         }
-    </div>
 </div>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+        });
+        
+        $(function () {
+            if (!Modernizr.inputtypes.date) {
+                $(function () {
+                    $("input[type='date']")
+                        .datepicker({ dateFormat: 'dd/mm/yy' })
+                        .get(0).setAttribute("type", "text");
+                })
+            }
+        });
+    </script>
+}

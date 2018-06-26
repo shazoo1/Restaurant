@@ -1,28 +1,26 @@
 ﻿@model Restaurant.Web.Models.Order.View.OrderHeaderViewModel
 
-
 @using (Html.BeginForm("Amend", "Orders", FormMethod.Post,
     new
     {
-        @class = "row",
+        @class = "row div-table-row",
         @data_toggle = "collapse",
         @data_target = "#item" + @Model.Id
     }))
 {
-    @Html.LabelForModel(Model.TableNumber.ToString(), new { @class = "col-sm" })
-    @Html.LabelForModel(Model.Price.ToString(), new { @class = "col-sm" })
-    @Html.LabelForModel(Model.CreatedAt.ToString(), new { @class = "col-sm" })
-    @Html.LabelForModel(Model.LastModifiedAt.ToString(), new { @class = "col-sm" })
-    @Html.LabelForModel(Model.OrderState, new { @class = "col-sm" })
-    @Html.LabelForModel(Model.UserName, new { @class = "col-sm" })
-    //Hidden inputs for data sending
+
+    <div class="col">@Html.DisplayFor(m => m.TableNumber)</div>
+    <div class="col">@Html.DisplayFor(m => m.Price)</div>
+    <div class="col">@Html.DisplayFor(m => m.CreatedAt)</div>
+    <div class="col">@Html.DisplayFor(m => m.LastModifiedAt)</div>
+    <div class="col">@Html.DisplayFor(m => m.OrderState)</div>
+    <div class="col">@Html.DisplayFor(m => m.UserName)</div>
     <input type="hidden" name="tableNumber" value="@Model.TableNumber" />
-    <input type="hidden" name ="price" value="@Model.Price" />
+    <input type="hidden" name="price" value="@Model.Price" />
     <input type="hidden" name="createdAt" value="@Model.CreatedAt" />
     <input type="hidden" name="lastModifiedAt" value="@Model.LastModifiedAt" />
     <input type="hidden" name="orderState" value="@Model.OrderState" />
     <input type="hidden" name="userName" value="@Model.UserName" />
     <input type="hidden" name="id" value="@Model.Id" />
-
-    <input type="submit" value="Изменить" class="col-sm" />
+    <div class="col d-flex align-items-center"><input type="submit" value="Детали" /></div>
 }

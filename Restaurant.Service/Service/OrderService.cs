@@ -32,19 +32,32 @@ namespace Restaurant.Service.Service
             return ((IEnumerable<Order>)repo.GetAll()).ToList();
         }
 
-        private IEnumerable<Order> GetAllWithStates(OrderState[] states)
+        public List<Order> GetAll(DateTime? filterDate,
+            int? filterTableNumber, OrderState? filterState)
         {
             var repo = _uow.Get<Order>();
-            return ((IEnumerable<Order>)repo.GetAll()).ToList()
-                .Where(x => states.Contains(x.State));
+            var result = ((IEnumerable<Order>)repo.GetAll());
+            if (filterDate != null)
+            {
+                var date = (DateTime)filterDate;
+                result = result
+                    .Where(x => DateTime.Compare(x.CreatedAt.Date, date.Date) == 0);
+            }
+            if (filterTableNumber != null)
+                result = result.Where(x => x.TableNumber == filterTableNumber);
+            if (filterState != null)
+                result = result.Where(x => x.State == filterState);
+            return result.ToList();
         }
 
-        public IEnumerable<Order> GetAllForUser(IPrincipal user)
+        public IEnumerable<Order> GetAllForUser(IPrincipal user,
+            DateTime? filterDate, int? filterTableNumber,
+            OrderState? filterState)
         {
             if (user.IsInRole(RoleName.Admin) || user.IsInRole(RoleName.Waiter))
-                return GetAll();
+                return GetAll(filterDate, filterTableNumber, filterState);
             if (user.IsInRole(RoleName.Cook))
-                return GetAllWithStates(new OrderState[] { OrderState.accepted });
+                return GetAll(filterDate, filterTableNumber, null).Where(x => x.State == OrderState.accepted);
             return null;
         }
 

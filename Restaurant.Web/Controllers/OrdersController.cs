@@ -29,10 +29,10 @@ namespace Restaurant.Web.Controllers
 
         public ActionResult Index(DateTime? filterDate, int? filterTableNumber, OrderState? filterState)
         {
-            var dbdata = _orderService.GetAll();
-            var model = new OrderListViewModel();
+            var model = SetModelRoles(new OrderListViewModel());
             model.OrderList = Mapper.Map<List<OrderViewModel>>
-                (_orderService.GetAllForUser(User));
+                (_orderService.GetAllForUser(User, filterDate,
+                filterTableNumber, filterState));
             return View(model);
         }
 
@@ -118,6 +118,23 @@ namespace Restaurant.Web.Controllers
             var order = _orderService.GetById(id);
             order.State = state;
             _orderService.Update(order);
+        }
+
+        private OrderListViewModel SetModelRoles(OrderListViewModel model)
+        {
+            if (User.IsInRole(RoleName.Cook))
+            {
+                model.IsCook = true;
+            }
+            if (User.IsInRole(RoleName.Waiter))
+            {
+                model.IsWaiter = true;
+            }
+            if (User.IsInRole(RoleName.Admin))
+            {
+                model.IsAdmin = true;
+            }
+            return model;
         }
     }
 }

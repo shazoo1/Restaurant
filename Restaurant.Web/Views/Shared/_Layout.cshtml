@@ -9,18 +9,21 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 </head>
-<body style="background-color:#DDDDDD">
+<body style="background-image:url(../../Content/images/site-background.jpg)">
     <div class="page-container">
         <div class="container">
             <nav class="navbar navbar-expand-sm">
                 <a class="navbar-brand" href="@Url.Action("Index", "Orders")">
-                    Sibers
+                    Ресторан
                 </a>
                 <ul class="navbar-nav navbar-collapse">
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("List", "Menu")">Меню</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Menu")">Меню</a></li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Orders")">Заказы</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("index", "Users")">Пользователи</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("List", "Users")">Пользователи</a></li>
                 </ul>
+                <label style="margin-bottom:0; margin-right: 10px;">
+                    @HttpContext.Current.User.Identity.Name
+                </label>
                 @Html.ActionLink("Выйти из себя", "Logout", "Login", null, new { @style = "align:right" })
             </nav>
         </div>
@@ -31,10 +34,7 @@
                     <p>&copy; @DateTime.Now.Year - Ресторан</p>
                 </footer>
             </div>
-
-
             @RenderSection("scripts", required: false)
-        
     </div>
 </body>
 </html>

@@ -21,7 +21,7 @@ namespace Restaurant.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SignIn(LoginModel model)
+        public async Task<ActionResult> SignIn(LoginViewModel model)
         {
             var result = await SignInManager.PasswordSignInAsync(model.UserName,
                 model.Password, model.IsPersistent, false);

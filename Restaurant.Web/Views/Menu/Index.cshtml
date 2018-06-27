@@ -1,18 +1,22 @@
 ﻿
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Меню";
 }
-
-<h2>Меню</h2>
-@using (Html.BeginForm("Add", "Menu"))
-{
-<input type="submit" value="Добавить" formaction=@Url.Action("Add") formmethod="get"/>
-}
-<table>
-    <tr>
-        <td>Блюдо</td>
-        <td>Стоимость</td>
-        <td>Описание</td>
+<div class="jumbotron" style="background-image: url(../../Content/images/menu-background.jpg)">
+    <div class="highlighter">
+        <h2>Меню</h2>
+        @using (Html.BeginForm("Add", "Menu"))
+        {
+            <input class="btn btn-warning" type="submit" value="Добавить" formaction=@Url.Action("Add") formmethod="get" />
+        }
+    </div>
+</div>
+<table class="table table-striped">
+    <tr class="menu-table-head">
+        <th>Блюдо</th>
+        <th>Стоимость</th>
+        <th>Описание</th>
     </tr>
     @foreach (var dish in Model.Dishes)
     {

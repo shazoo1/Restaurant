@@ -217,7 +217,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mapping\WebProfile.cs" />
-    <Compile Include="Models\Login\LoginModel.cs" />
+    <Compile Include="Models\Login\LoginViewModel.cs" />
     <Compile Include="Models\Menu\DishesListModel.cs" />
     <Compile Include="Models\Menu\DishMenuModel.cs" />
     <Compile Include="Models\Menu\View\NewDishViewModel.cs" />
@@ -242,8 +242,11 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\menu-add-background.jpg" />
+    <Content Include="Content\images\menu-background.jpg" />
     <Content Include="Content\images\new-order-background.jpg" />
     <Content Include="Content\images\orders-background.jpg" />
+    <Content Include="Content\images\users-background.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -397,11 +400,9 @@
     <Content Include="Views\Users\List.cshtml" />
     <Content Include="Views\Users\Partial\CreateUserPartialView.cshtml" />
     <Content Include="Views\Orders\Partial\OrderPartialView.cshtml" />
-    <Content Include="Views\Orders\Partial\OrderDishPartialView.cshtml" />
-    <Content Include="Views\Orders\Partial\OrderHeaderPartialView.cshtml" />
     <Content Include="Views\Orders\Amend.cshtml" />
     <Content Include="Views\Orders\Partial\AmendOrderHeaderPartialView.cshtml" />
-    <Content Include="Views\Orders\Partial\AmendActionsPartialView.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

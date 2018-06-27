@@ -5,9 +5,8 @@ function fillUnselectedList() {
         var dishName = unselected[i].Name;
         var dishPrice = unselected[i].Price;
         var dishId = unselected[i].Id;
-        var row = $('<tr><td>' + dishName + '</td><td>' +
-            dishPrice + '</td><td><input type="button" value="Добавить"' +
-            'onclick="addToOrder(this.id, this)" id=' + dishId + ' /></td></tr>');
+        var row = $('<tr id="' + dishId + '" class="menu-table-row" onclick="addToOrder(this.id, this)"><td>' + dishName + '</td><td>' +
+            dishPrice + '</td></tr>');
         $('#menu').append(row);
     }
 }
@@ -32,9 +31,8 @@ function removeFromOrder(id, button) {
     var dishName = unselectedDish.Name;
     var dishPrice = unselectedDish.Price;
     var dishId = unselectedDish.Id;
-    var row = $('<tr><td>' + dishName + '</td><td>' +
-        dishPrice + '</td><td><input type="button" value="Добавить"' +
-        'onclick="addToOrder(this.id, this)" id=' + dishId + ' /></td></tr>');
+    var row = $('<tr id="' + dishId + '" class="menu-table-row" onclick="addToOrder(this.id, this)"><td>' + dishName + '</td><td>' +
+        dishPrice + '</td></tr>');
     $('#menu').append(row);
     selected.splice(unselectedDishIndex, 1);
     countTotal();

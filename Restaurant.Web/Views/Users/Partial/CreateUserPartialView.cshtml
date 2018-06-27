@@ -1,15 +1,17 @@
 ﻿@model Restaurant.Web.Models.Users.View.NewUserViewModel
-<input type="button" data-toggle="collapse" data-target="#newUserInput" value="Новый пользователь">
+<input type="button" class="btn btn-warning" data-toggle="collapse" data-target="#newUserInput" value="Новый пользователь">
 @using (Html.BeginForm("Create", "Users", FormMethod.Post,
-    new { @class = "collapse", @id = "newUserInput" }))
+    new { @class = "collapse", @id = "newUserInput", @style = "margin-top:20px" }))
 {
-    <p>Логин</p>
+    <h6>Логин</h6>
     @Html.TextBoxFor(m => m.NewUser.UserName);
-    <p>Пароль</p>
+    <h6>Пароль</h6>
     @Html.PasswordFor(m => m.NewUser.Password);
-    <p>Почта</p>
+    <h6>Почта</h6>
     @Html.TextBoxFor(m => m.NewUser.Email);
-    <p>Роль</p>
+    <h6>Роль</h6>
     @Html.DropDownListFor(m => m.SelectedUserRoleId, Model.UserRoles);
-    <input type="submit" value="Создать" />
+    <br />
+    <br />
+    <input class="btn btn-warning" type="submit" value="Создать" />
 }

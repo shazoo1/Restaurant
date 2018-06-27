@@ -1,18 +1,26 @@
 ﻿@model Restaurant.Web.Models.Menu.View.NewDishViewModel
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Добавить";
 }
-<div class="jumbotron">
-    <h2>Добавить блюдо</h2>
+<div class="jumbotron" style="background-image:url(../../Content/images/menu-add-background.jpg); background-size:cover" >
+    <div class="highlighter">
+        <h2>Добавить блюдо</h2>
+    </div>
 </div>
-@using (Html.BeginForm("Create", "Menu", FormMethod.Post))
+@using (Html.BeginForm("Create", "Menu", FormMethod.Post, new { @class="row container"}))
 {
-    <p>Название</p>
-    @Html.TextBoxFor(model => model.Name);
-    <p>Цена</p>
-    @Html.TextBoxFor(model => model.Price);
-    <p>Описание</p>
-    @Html.TextAreaFor(model => model.Description);
-    <br/>
-    <input type="submit" value="Добавить"/>
+<div class="col-md-6">
+    <h6>Название</h6>
+    @Html.TextBoxFor(model => model.Name)
+    <h6>Цена</h6>
+    @Html.TextBoxFor(model => model.Price)
+</div>
+<div class="col-md-6">
+    <h6>Описание</h6>
+    @Html.TextAreaFor(model => model.Description, new { @style="width: 100%; "})
+</div>
+<div class="col-md-12" style="text-align:center; margin-top:20px">
+    <input class="btn btn-warning" type="submit" value="Добавить" />
+</div>
 }

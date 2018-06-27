@@ -1,31 +1,33 @@
 ﻿@model Restaurant.Web.Models.Order.View.OrderHeaderViewModel
-<div class="col-md-4">
-    <h4 style="text-align:center">Заказ №</h4>
-    @Html.LabelForModel(Model.Id.ToString())
+<div class="col-md-4 order-summary-container">
+    <div class="order-summary-container-header">
+        <h4>Заказ №</h4>
+        @Html.LabelForModel(Model.Id.ToString())
+    </div>
     <br />
     <br />
-    <div>
+    <div class="order-summary-item">
         <h6 style="display:inline">Номер стола: </h6>
         @Html.LabelForModel(Model.TableNumber.ToString())
     </div>
-    <div>
+    <div class="order-summary-item">
         <h6 style="display:inline">Официант: </h6>
         @Html.LabelForModel(Model.UserName)
     </div>
-    <div>
+    <div class="order-summary-item">
         <h6 style="display:inline">Создан: </h6>
         @Html.LabelForModel(Model.CreatedAt.ToString())
     </div>
-    <div>
+    <div class="order-summary-item">
         <h6 style="display:inline">Изменён: </h6>
         @Html.LabelForModel(Model.LastModifiedAt.ToString())
     </div>
-    <div>
+    <div class="order-summary-item">
         <h6 style="display:inline">Статус: </h6>
         @Html.LabelForModel(Model.OrderState)
     </div>
     <div>
-        <h6 style="display:inline">Счёт: </h6>
+        <h6 style="display:inline" class="order-summary-item">Счёт: </h6>
         @Html.LabelForModel(Model.Price.ToString())
     </div>
     @Html.LabelForModel(Model.Price)

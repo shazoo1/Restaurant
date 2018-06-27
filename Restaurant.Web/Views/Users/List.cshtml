@@ -1,26 +1,29 @@
 ﻿@model Restaurant.Web.Models.Users.View.UsersViewModel
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Пользователи";
 }
 
-<div class="jumbotron">
-    <h2>Пользователи</h2>
-    @{Html.RenderPartial("~/Views/Users/Partial/CreateUserPartialView.cshtml", Model.NewUser);}
-</div>
-<div class="table">
-    <div class="row">
-        <div class="col-sm">Пользователь</div>
-        <div class="col-sm">E-Mail</div>
-        <div class="col-sm">Роль</div>
+<div class="jumbotron" style="background-image:url(../../Content/images/users-background.jpg)">
+    <div class="highlighter">
+        <h2>Пользователи</h2>
+        @{Html.RenderPartial("~/Views/Users/Partial/CreateUserPartialView.cshtml", Model.NewUser);}
     </div>
+</div>
+<table class="table table-striped">
+    <tr class="row menu-table-head">
+        <th class="col-sm">Пользователь</th>
+        <th class="col-sm">E-Mail</th>
+        <th class="col-sm">Роль</th>
+    </tr>
 
     @foreach (var user in Model.Users)
     {
-        <div class="row">
-            <div class="col-sm">@user.UserName</div>
-            <div class="col-sm">@user.Email</div>
-            <div class="col-sm">@user.Role</div>
-        </div>
+        <tr class="row">
+            <td class="col-sm">@user.UserName</td>
+            <td class="col-sm">@user.Email</td>
+            <td class="col-sm">@user.Role</td>
+        </tr>
         }
-</div>
+</table>
 

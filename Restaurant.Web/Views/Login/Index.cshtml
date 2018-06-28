@@ -7,19 +7,22 @@
 <div class="login-inputs-container">
         <h2>Войдите в систему</h2>
     <div style="align-content:center; width: 100%">
-        @using (Html.BeginForm("SignIn", "Login", FormMethod.Post))
+        @using (Html.BeginForm("Index", "Login", FormMethod.Post))
         {
-            <div style="display:block;">
-                @Html.AntiForgeryToken()
-                @Html.TextBoxFor(m => m.UserName,
-    new { @class="login-input", @style="border-radius:20px 20px 0 0", placeholder = Html.DisplayNameFor(x => x.UserName) }) <br />
-                @Html.PasswordFor(m => m.Password,
-           new { @class = "login-input",  @style = "border-radius:0 0 20px 20px", placeholder = Html.DisplayNameFor(x => x.Password) }) <br />
-                @Html.LabelFor(m => m.IsPersistent)
-                @Html.CheckBoxFor(m => m.IsPersistent)
-                <br />
-                <input type="submit" value="Войти" />
-            </div>
+        <div style="display:block;">
+            @Html.AntiForgeryToken()
+            @Html.TextBoxFor(m => m.UserName,
+new { @class="login-input", @style="border-radius:20px 20px 0 0",
+    placeholder = Html.DisplayNameFor(x => x.UserName) })
+            <br />
+            @Html.PasswordFor(m => m.Password,
+       new { @class = "login-input",  @style = "border-radius:0 0 20px 20px", placeholder = Html.DisplayNameFor(x => x.Password) }) <br />
+            @Html.ValidationSummary()
+            @Html.LabelFor(m => m.IsPersistent)
+            @Html.CheckBoxFor(m => m.IsPersistent)
+            <br />
+            <input type="submit" value="Войти" />
+        </div>
         }
     </div>
 </div>

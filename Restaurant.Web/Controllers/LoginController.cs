@@ -12,7 +12,9 @@ namespace Restaurant.Web.Controllers
 {
     public class LoginController : BaseController
     {
+        
         // GET: Login
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
@@ -21,21 +23,32 @@ namespace Restaurant.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SignIn(LoginViewModel model)
+        public async Task<ActionResult> Index(LoginViewModel model)
         {
-            var result = await SignInManager.PasswordSignInAsync(model.UserName,
-                model.Password, model.IsPersistent, false);
-            switch (result)
+            
+            if (ModelState.IsValid)
             {
-                case SignInStatus.Success:
-                    {
-                        return RedirectToAction("Index", "Orders");
-                    }
-                default:
-                    {
-                        return RedirectToAction("Index", "Login");
-                    }
+                var result = await SignInManager.PasswordSignInAsync(model.UserName,
+                model.Password, model.IsPersistent, false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        {
+                            return RedirectToAction("Index", "Orders");
+                        }
+                    case SignInStatus.Failure:
+                        {
+                            ModelState.AddModelError("Password", "Неверное имя пользователя или пароль");
+                            ModelState.AddModelError("UserName", new Exception());
+                            break;
+                        }
+                    default:
+                        {
+                            return View(model);
+                        }
+                }
             }
+            return View(model);
         }
 
         public ActionResult Logout()

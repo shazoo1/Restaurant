@@ -12,7 +12,7 @@ namespace Restaurant.Web
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate.min.js"));
+                        "~/Scripts/jquery.validate.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery-ui").Include(
                         "~/Scripts/jquery-ui-{version}.min.js"));

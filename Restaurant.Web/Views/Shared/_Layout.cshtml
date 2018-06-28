@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
     @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body style="background-image:url(../../Content/images/site-background.jpg)">
@@ -17,9 +18,12 @@
                     Ресторан
                 </a>
                 <ul class="navbar-nav navbar-collapse">
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Menu")">Меню</a></li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Orders")">Заказы</a></li>
+                    @if (HttpContext.Current.User.IsInRole("Admin"))
+                    {
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Menu")">Меню</a></li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("List", "Users")">Пользователи</a></li>
+                    }
                 </ul>
                 <label style="margin-bottom:0; margin-right: 10px;">
                     @HttpContext.Current.User.Identity.Name

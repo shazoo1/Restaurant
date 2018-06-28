@@ -20,6 +20,21 @@ namespace Restaurant.Service.Service
                 .GetAllWhere(x => !ids.Contains(x.Id))).ToList();
         }
 
+        public List<Dish> GetExisting()
+        {
+            var repo = _uow.Get<Dish>();
+            return ((IEnumerable<Dish>)repo.GetAllWhere(x => !x.IsDelete))
+                .ToList();
+        }
+
+        public void Delete(Guid id)
+        {
+            var repo = _uow.Get<Dish>();
+            var dish = repo.FindById(id);
+            dish.IsDelete = true;
+            repo.Update(dish);
+        }
+
         public List<Dish> GetDishesByIds(List<Guid> ids)
         {
             var repo = _uow.Get<Dish>();

@@ -13,6 +13,9 @@ namespace Restaurant.Web
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery-ui").Include(
+                        "~/Scripts/jquery-ui-{version}.min.js"));
             
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
@@ -22,9 +25,8 @@ namespace Restaurant.Web
                       "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap-datetimepicker.css",
-                "~/Content/bootstrap-datetimepicker.min.css",
                       "~/Content/bootstrap.min.css",
+                      "~/Content/themes/base/all.css",
                       "~/Content/site.css"));
         }
     }

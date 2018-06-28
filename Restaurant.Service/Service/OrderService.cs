@@ -47,6 +47,8 @@ namespace Restaurant.Service.Service
                 result = result.Where(x => x.TableNumber == filterTableNumber);
             if (filterState != null)
                 result = result.Where(x => x.State == filterState);
+            if (result == null)
+                return new List<Order>();
             return result.ToList();
         }
 
@@ -58,7 +60,7 @@ namespace Restaurant.Service.Service
                 return GetAll(filterDate, filterTableNumber, filterState);
             if (user.IsInRole(RoleName.Cook))
                 return GetAll(filterDate, filterTableNumber, null).Where(x => x.State == OrderState.accepted);
-            return null;
+            return new List<Order>();
         }
 
         public new void Update(Order order)

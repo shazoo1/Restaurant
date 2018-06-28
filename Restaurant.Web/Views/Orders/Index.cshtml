@@ -20,7 +20,7 @@
     @Html.TextBoxFor(m => m.FilterTableNumber, new { @class = "form-control", @type = "number", @min = "1", @step = "1" })
 
     @Html.LabelFor(m => m.FilterDate)
-    @Html.TextBoxFor(m => m.FilterDate, new { @class="form-control", @type="date"})
+    @Html.TextBoxFor(m => m.FilterDate, new {@id="filterDate", @class = "form-control jqueryui-marker-datepicker", @type = "date", placeholder = Html.DisplayNameFor(x => x.FilterDate) })
 
     if (Model.IsAdmin || Model.IsWaiter)
     {
@@ -44,20 +44,4 @@
             Html.RenderPartial("~/Views/Orders/Partial/OrderPartialView.cshtml", order);
         }
 </div>
-@section Scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            
-        });
-        
-        $(function () {
-            if (!Modernizr.inputtypes.date) {
-                $(function () {
-                    $("input[type='date']")
-                        .datepicker({ dateFormat: 'dd/mm/yy' })
-                        .get(0).setAttribute("type", "text");
-                })
-            }
-        });
-    </script>
-}
+    

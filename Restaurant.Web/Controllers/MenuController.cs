@@ -25,7 +25,7 @@ namespace Restaurant.Web.Controllers
         public ActionResult Index()
         {
             var dishesListModel = new DishesListModel();
-            dishesListModel.Dishes = Mapper.Map<List<DishMenuModel>>(_dishService.GetAll());
+            dishesListModel.Dishes = Mapper.Map<List<DishMenuModel>>(_dishService.GetExisting());
             return View(dishesListModel);
         }
 
@@ -38,6 +38,12 @@ namespace Restaurant.Web.Controllers
         public ActionResult Create(NewDishViewModel dish)
         {
             _dishService.Add(Mapper.Map<Dish>(dish));
+            return RedirectToAction("Index", "Menu");
+        }
+        
+        public ActionResult Delete(Guid id)
+        {
+            _dishService.Delete(id);
             return RedirectToAction("Index", "Menu");
         }
     }

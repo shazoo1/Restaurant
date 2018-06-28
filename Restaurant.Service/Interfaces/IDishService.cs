@@ -11,5 +11,7 @@ namespace Restaurant.Service.Interfaces
     {
         List<Dish> GetDishesByIds(List<Guid> ids);
         List<Dish> GetAllBut(IEnumerable<Guid> ids);
+        List<Dish> GetExisting();
+        void Delete(Guid id);
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using Microsoft.AspNet.Identity.Owin;
 using Restaurant.Service.Identity;
 using Restaurant.Web.Models.Login;
@@ -13,6 +14,7 @@ namespace Restaurant.Web.Controllers
     public class LoginController : BaseController
     {
         
+        public LoginController(IMapper mapper) : base(mapper) { }
         // GET: Login
         [AllowAnonymous]
         public ActionResult Index()

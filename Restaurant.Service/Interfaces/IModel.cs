@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaurant.Domain.Enums
+namespace Restaurant.Service.Interfaces
 {
-    public enum OrderState
+    public interface IModel
     {
-        Accepted,
-        Ready,
-        Served,
-        Paid
+        Guid Id { get; set; }
     }
 }

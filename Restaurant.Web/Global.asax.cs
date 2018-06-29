@@ -20,7 +20,7 @@ namespace Restaurant.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Mapper.Initialize(config => config.AddProfile<WebProfile>());
+            //Mapper.Initialize(config => config.AddProfile<WebProfile>());
             /*var migrationConfig = new Persistence.Configuration();
             var migrator = new DbMigrator(migrationConfig);
             migrator.Update();*/

@@ -6,17 +6,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Restaurant.Domain.Entities;
 using Restaurant.Domain.Enums;
+using Restaurant.Service.Models;
+using Restaurant.Service.Models.Order;
 
 namespace Restaurant.Service.Interfaces
 {
-    public interface IOrderService : IBaseService<Order>
+    public interface IOrderService : IBaseService<OrderModel>
     {
-        List<Order> GetAll(DateTime? filterDate, int? filterTableNumber, OrderState? filterState);
-        void AddNewOrder(Order order);
-        IEnumerable<Order> GetAllForUser(IPrincipal user,
+        OrderModel GetById(Guid id);
+        List<OrderModel> GetAll(DateTime? filterDate, int? filterTableNumber, OrderState? filterState);
+        void AddNewOrder(List<OrderPartJsModel>newOrderModels,
+            int tableNumber, IPrincipal user);
+        IEnumerable<OrderModel> GetAllForUser(IPrincipal user,
             DateTime? filterDate, int? filterTableNumber,
             OrderState? filterState);
-        new void Update(Order order);
-        void UpdateWithDishes(List<OrderPart> orderParts, Guid orderId);
+        void Update(OrderModel orderModel);
+        void UpdateWithDishes(List<OrderPartModel> orderPartModels, Guid orderId);
     }
 }

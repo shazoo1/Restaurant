@@ -47,10 +47,12 @@ namespace Restaurant.Web
             container.RegisterType<IOrderService, OrderService>();
             container.RegisterType<IDishService, DishService>();
             container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IRestaurantDbContext, RestaurantDbContext>();
+
+            container.RegisterInstance(Mapping.Configuration.CreateMapper());
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterType<IRestaurantDbContext, RestaurantDbContext>();
             container.RegisterType<IUnitOfWork, UnitOfWork>(new PerRequestLifetimeManager());
         }
     }

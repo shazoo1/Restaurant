@@ -5,8 +5,9 @@ function fillUnselectedList() {
         var dishName = unselected[i].Name;
         var dishPrice = unselected[i].Price;
         var dishId = unselected[i].Id;
+        var dishDescription = unselected[i].Description;
         var row = $('<tr id="' + dishId + '" class="menu-table-row" onclick="addToOrder(this.id, this)"><td>' + dishName + '</td><td>' +
-            dishPrice + '</td></tr>');
+            dishPrice + '</td><td>'+ dishDescription +'</td></tr>');
         $('#menu').append(row);
     }
 }
@@ -31,8 +32,9 @@ function removeFromOrder(id, button) {
     var dishName = unselectedDish.Name;
     var dishPrice = unselectedDish.Price;
     var dishId = unselectedDish.Id;
+    var dishDesc = unselectedDish.Description;
     var row = $('<tr id="' + dishId + '" class="menu-table-row" onclick="addToOrder(this.id, this)"><td>' + dishName + '</td><td>' +
-        dishPrice + '</td></tr>');
+        dishPrice + '</td><td>'+dishDesc+'</td></tr>');
     $('#menu').append(row);
     selected.splice(unselectedDishIndex, 1);
     countTotal();
@@ -52,5 +54,14 @@ function countTotal() {
         total = total + (sums[i].innerText * 1);
     }
     $('#total').text(total);
+}
+function getModel() {
+    var modelToSend = [];
+    for (var i = 0; i < selected.length; i++) {
+        dishId = selected[i].Dish.Id;
+        dishQuantity = selected[i].Quantity;
+        modelToSend.push({id:dishId, quantity:dishQuantity});
+    }
+    return modelToSend;
 }
 

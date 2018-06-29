@@ -40,6 +40,7 @@
                 <tr class="menu-table-head">
                     <th>Блюдо</th>
                     <th>Цена</th>
+                    <th>Описание</th>
                 </tr>
             </thead>
         </table>
@@ -47,17 +48,20 @@
 <script src="~/Scripts/addOrder.js" type="text/javascript">
 </script>
 <script>
-var unselected = @Html.Raw(Json.Encode(Model.Dishes));
+var unselected = @Html.Raw(Json.Encode(Model.AllDishes));
 var selected = [];
     fillUnselectedList();
     document.getElementById('send').addEventListener('click', function () {
-    if (selected.length > 0) {
-        $.post('@(Url.Action("Create","Orders"))', {
-            order: selected,
-            tableNumber: document.getElementById('tableNumber').value,
-        }, function (data) {
-            window.location.href = data;
-        });
-    }
-})
+        if (selected.length > 0) {
+            var model = getModel();
+            var number = document.getElementById('tableNumber').value;
+            $.ajax({
+                type: 'POST', url: '@(Url.Action("Add","Orders"))',
+                data: { order: model, tableNumber: number },
+                success: function (res) {
+                    window.location.href = '@Url.Action("Index","Orders")';
+                }
+            });
+        }
+    })
 </script>

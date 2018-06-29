@@ -7,25 +7,26 @@ using AutoMapper;
 using Restaurant.Domain.Entities;
 using Restaurant.Domain.Enums;
 using Restaurant.Service.Interfaces;
+using Restaurant.Service.Models;
 using Restaurant.Web.Models.Menu;
 using Restaurant.Web.Models.Menu.View;
 
 namespace Restaurant.Web.Controllers
 {
     [Authorize (Roles = RoleName.Admin)]
-    public class MenuController : Controller
+    public class MenuController : BaseController
     {
         private readonly IDishService _dishService;
 
-        public MenuController(IDishService dishService)
+        public MenuController(IDishService dishService, IMapper mapper) : base (mapper)
         {
             _dishService = dishService;
         }
         // GET: Menu
         public ActionResult Index()
         {
-            var dishesListModel = new DishesListModel();
-            dishesListModel.Dishes = Mapper.Map<List<DishMenuModel>>(_dishService.GetExisting());
+            var dishesListModel = new DishesListViewModel();
+            dishesListModel.Dishes = _dishService.GetAll();
             return View(dishesListModel);
         }
 
@@ -35,9 +36,9 @@ namespace Restaurant.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(NewDishViewModel dish)
+        public ActionResult Add(NewDishViewModel dish)
         {
-            _dishService.Add(Mapper.Map<Dish>(dish));
+            _dishService.Add(_mapper.Map<DishModel>(dish));
             return RedirectToAction("Index", "Menu");
         }
         

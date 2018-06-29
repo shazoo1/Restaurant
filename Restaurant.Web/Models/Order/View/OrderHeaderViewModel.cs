@@ -8,9 +8,8 @@ namespace Restaurant.Web.Models.Order.View
     public class OrderHeaderViewModel
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
         public int TableNumber { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime LastModifiedAt { get; set; }
         public string OrderState { get; set; }

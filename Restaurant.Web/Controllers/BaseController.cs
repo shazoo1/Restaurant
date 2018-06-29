@@ -6,15 +6,21 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Restaurant.Service.Identity;
+using AutoMapper;
 
 namespace Restaurant.Web.Controllers
 {
     public abstract class BaseController : Controller
     {
         protected UserManager UserManager => Request.GetOwinContext().GetUserManager<UserManager>();
-
         protected RoleManager RoleManager => Request.GetOwinContext().GetUserManager<RoleManager>();
         protected SignInManager SignInManager => HttpContext.GetOwinContext().Get<SignInManager>();
         protected IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
+        protected IMapper _mapper;
+
+        public BaseController(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
     }
 }

@@ -8,13 +8,6 @@ using Restaurant.Domain.Interfaces;
 
 namespace Restaurant.Service.Interfaces
 {
-    public interface IBaseService<T> where T : IEntity
-    {
-        List<T> GetAll();
-        T GetById(Guid id);
-        void Remove(Guid id);
-        void Remove(T item);
-        T Add(T item);
-        T Update(T item);
-    }
+    public interface IBaseService<T> where T : IModel
+    { }
 }

@@ -9,7 +9,7 @@ namespace Restaurant.Web.Models.Users.View
 {
     public class UsersViewModel
     {
-        public List<UserModel> Users { get; set; }
+        public List<UserViewModel> Users { get; set; }
         public NewUserViewModel NewUser { get; set; } = new NewUserViewModel();
     }
 }

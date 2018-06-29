@@ -10,7 +10,7 @@
     </div>
 </div>
 <div class="row">
-    @{Html.RenderPartial("~/Views/Orders/Partial/AmendOrderHeaderPartialView.cshtml", Model.OrderHeader);}
+    @{Html.RenderPartial("~/Views/Orders/Partial/AmendOrderHeaderPartialView.cshtml", Model);}
     <div class="col-md-8" style="display:inline">
         <h3 style="text-align:center">Блюда</h3>
         <table class="table" id="dishes">
@@ -19,7 +19,7 @@
                 <th class="col-sm">Количество</th>
                 <th class="col-sm">Стоимость</th>
             </tr>
-            @foreach (var dish in Model.Dishes)
+            @foreach (var dish in Model.OrderParts)
             {
             <tr class="row">
                 <td class="col-sm">@dish.Name</td>
@@ -36,34 +36,34 @@
         {
             using (Html.BeginForm("SetCooked", "Orders", FormMethod.Post, new { @class="btn btn-warning"}))
             {
-                <input type="hidden" name="id" value="@Model.OrderHeader.Id" />
+                <input type="hidden" name="id" value="@Model.Id" />
                 <input type="submit" value="Отметить готовым" />
             }
         }
         else if (Model.IsWaiter)
         {
-            if (Model.OrderHeader.OrderState == "ready")
+            if (Model.OrderState == "Ready")
             {
                 using (Html.BeginForm("SetServed", "Orders", FormMethod.Post, new { @class = "btn btn-warning" }))
                 {
-                    <input type="hidden" name="id" value="@Model.OrderHeader.Id" />
+                    <input type="hidden" name="id" value="@Model.Id" />
                     <input type="submit" value="Отметить поданным" />
                 }
                 using (Html.BeginForm("SetPaid", "Orders", FormMethod.Post, new { @class = "btn btn-warning" }))
                 {
-                    <input type="hidden" name="id" value="@Model.OrderHeader.Id" />
+                    <input type="hidden" name="id" value="@Model.Id" />
                     <input type="submit" value="Отметить оплаченным" />
                 }
             }
-            if (Model.OrderHeader.OrderState == "served")
+            if (Model.OrderState == "Served")
             {
                 using (Html.BeginForm("SetPaid", "Orders", FormMethod.Post, new { @class = "btn btn-warning" }))
                 {
-                    <input type="hidden" name="id" value="@Model.OrderHeader.Id" />
+                    <input type="hidden" name="id" value="@Model.Id" />
                     <input type="submit" value="Отметить оплаченным" />
                 }
             }
-            if (Model.OrderHeader.OrderState == "accepted")
+            if (Model.OrderState == "Accepted")
             {
                 <input class="btn btn-warning" type="button" value="Добавить блюдо" data-toggle="collapse" data-target="#addDishMenu" />
                 <table class="collapse table" id="addDishMenu" style="table-layout:fixed; width: 80%">
@@ -88,9 +88,9 @@
                 <script>
                 var unselected;
                 var selected = [];
-                var selectedOrderId = "@Model.OrderHeader.Id.ToString()";
+                var selectedOrderId = "@Model.Id.ToString()";
                 window.onload = function () {
-                unselected = @Html.Raw(Json.Encode(Model.OtherDishes));
+                unselected = @Html.Raw(Json.Encode(Model.Dishes));
                 for (var i = 0; i < unselected.length; i++) {
                     var nameCell = '<td>' + unselected[i].Name + '</td>';
                     var priceCell = '<td>' + unselected[i].Price + '</td>';

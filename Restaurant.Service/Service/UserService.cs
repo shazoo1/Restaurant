@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNet.Identity.Owin;
 using Restaurant.Domain.Identity.Entities;
 using Restaurant.Domain.Interfaces;
 using Restaurant.Service.Identity;
 using Restaurant.Service.Interfaces;
+using Restaurant.Service.Models;
 
 namespace Restaurant.Service.Service
 {
-    public class UserService : BaseService<User>, IUserService
+    public class UserService : BaseService<UserModel>, IUserService
     {
 
-        public UserService(IUnitOfWork uow) : base (uow)
+        public UserService(IUnitOfWork uow, IMapper mapper)
+            : base (uow, mapper)
         { }
 
         public List<(User, Role)> GetAllUsersWithRoles()

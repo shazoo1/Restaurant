@@ -1,38 +1,33 @@
 ﻿@model Restaurant.Web.Models.Order.View.OrderViewModel
 
-@using (Html.BeginForm("Amend", "Orders", FormMethod.Post,
+@using (Html.BeginForm("Details", "Orders", FormMethod.Get,
     new
     {
         @class = "row div-table-row",
         @data_toggle = "collapse",
-        @data_target = "#item" + @Model.OrderHeader.Id
+        @data_target = "#item" + @Model.Id
     }))
 {
 
-    <div class="col">@Html.DisplayFor(m => m.OrderHeader.TableNumber)</div>
-    <div class="col">@Html.DisplayFor(m => m.OrderHeader.Price)</div>
-    <div class="col">@Html.DisplayFor(m => m.OrderHeader.CreatedAt)</div>
-    <div class="col">@Html.DisplayFor(m => m.OrderHeader.LastModifiedAt)</div>
-    <div class="col">@Html.DisplayFor(m => m.OrderHeader.OrderState)</div>
-    <div class="col">@Html.DisplayFor(m => m.OrderHeader.UserName)</div>
-    <input type="hidden" name="tableNumber" value="@Model.OrderHeader.TableNumber" />
-    <input type="hidden" name="price" value="@Model.OrderHeader.Price" />
-    <input type="hidden" name="createdAt" value="@Model.OrderHeader.CreatedAt" />
-    <input type="hidden" name="lastModifiedAt" value="@Model.OrderHeader.LastModifiedAt" />
-    <input type="hidden" name="orderState" value="@Model.OrderHeader.OrderState" />
-    <input type="hidden" name="userName" value="@Model.OrderHeader.UserName" />
-    <input type="hidden" name="id" value="@Model.OrderHeader.Id" />
+    <div class="col">@Html.DisplayFor(m => m.TableNumber)</div>
+    <div class="col">@Html.DisplayFor(m => m.Price)</div>
+    <div class="col">@Html.DisplayFor(m => m.CreatedAt)</div>
+    <div class="col">@Html.DisplayFor(m => m.LastModifiedAt)</div>
+    <div class="col">@Html.DisplayFor(m => m.OrderState)</div>
+    <div class="col">@Html.DisplayFor(m => m.UserName)</div>
+    
+    <input type="hidden" name="id" value="@Model.Id" />
     <div class="col d-flex align-items-center"><input type="submit" value="Детали" /></div>
 }
-@if (@Model.Dishes.Count > 0)
+@if (@Model.OrderParts.Count > 0)
 {
-    <table class="table collapse" id="item@(Model.OrderHeader.Id)">
+    <table class="table collapse" id="item@(Model.Id)">
         <tr class="row menu-table-head">
             <th class="col-sm">Блюдо</th>
             <th class="col-sm">Количество</th>
             <th class="col-sm">Цена</th>
         </tr>
-        @foreach (var dishPart in Model.Dishes)
+        @foreach (var dishPart in Model.OrderParts)
         {
             <tr class="row">
                 <td class="col-sm">@dishPart.Name</td>

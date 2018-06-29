@@ -8,7 +8,7 @@ namespace Restaurant.Web.Models.Users.View
 {
     public class NewUserViewModel
     {
-        public UserModel NewUser { get; set; }
+        public UserViewModel NewUser { get; set; }
         public IEnumerable<SelectListItem> UserRoles { get; set; }
         public Guid SelectedUserRoleId { get; set; }
     }

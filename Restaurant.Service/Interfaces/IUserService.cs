@@ -11,5 +11,6 @@ namespace Restaurant.Service.Interfaces
     public interface IUserService : IBaseService<UserModel>
     {
         List<(User, Role)> GetAllUsersWithRoles();
+        void CreateUser(UserModel userModel);
     }
 }

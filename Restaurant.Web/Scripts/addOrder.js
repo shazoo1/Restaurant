@@ -18,12 +18,15 @@ function addToOrder(id, row) {
     selected.push({ Dish : selectedDish, Quantity : 0 });
     var counter = '<input type=number min="0" step="1" onchange="countSum(this)">'
     var deleteButton = '<input id="' + selectedDish.Id + '" type=button onclick="removeFromOrder(this.id, this)" value="Удалить"/>';
+    var hiddenId = '<input type="hidden" name="Id" value="' + selectedDish.Id + '"/>';
+    var hiddenQuantity = '<input type="hidden" name="Quantity" value=' + selectedDish.Quantity + '"/>';
     var rowToAdd = '<tr id="' + selectedDish.Id+'">' + '<td>' + selectedDish.Name + '</td><td id="price">' +
         selectedDish.Price + '</td><td>' + counter + '</td><td name="sum" id="sum">' +
         '</td><td>'+deleteButton+'</td></tr>';
     $('#dishesTable').append(rowToAdd);
     unselected.splice(selectedDishIndex, 1);
 }
+
 function removeFromOrder(id, button) {
     button.closest('tr').remove();
     var unselectedDishIndex = selected.findIndex(x => x.Dish.Id === id);

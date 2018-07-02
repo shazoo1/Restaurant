@@ -51,9 +51,15 @@ namespace Restaurant.Web.Controllers
         [HttpPost]
         [Authorize(Roles = RoleName.Admin + "," + RoleName.Waiter)]
         public ActionResult Add(List<OrderPartJsModel> order,
-            int tableNumber)
+            int? tableNumber)
         {
-            _orderService.AddNewOrder(order, tableNumber, HttpContext.User);
+            if (tableNumber == null)
+            {
+                ModelState.AddModelError("tableNumber", "Укажите номер стола.");
+                return Json(Url.Action("Add", "Orders"));
+            }
+                
+            _orderService.AddNewOrder(order, (int)tableNumber, HttpContext.User);
 
             return Json(Url.Action("Index", "Orders"));
         }

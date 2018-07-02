@@ -30,9 +30,9 @@
         @foreach (var dishPart in Model.OrderParts)
         {
             <tr class="row">
-                <td class="col-sm">@dishPart.Name</td>
+                <td class="col-sm">@dishPart.Dish.Name</td>
                 <td class="col-sm">@dishPart.Quantity</td>
-                <td class="col-sm">@dishPart.Price</td>
+                <td class="col-sm">@dishPart.Dish.Price</td>
             </tr>
         }
     </table>

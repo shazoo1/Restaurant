@@ -16,28 +16,6 @@ namespace Restaurant.Web.Mapping
 {
     public class WebProfile : Profile
     {
-        public WebProfile()
-        {
-            CreateMap<Dish, DishMenuModel>();
-            CreateMap<DishMenuModel, Dish>();
-            CreateMap<OrderPart, OrderDishViewModel>()
-                .ForMember(d => d.Id, opt => opt.MapFrom(s => s.Dish.Id))
-                .ForMember(d => d.Name, opt => opt.MapFrom(s => s.Dish.Name))
-                .ForMember(d => d.Price, opt => opt.MapFrom(s => s.Dish.Price))
-                .ForMember(d => d.Quantity, opt => opt.MapFrom(s => s.Quantity));
-            
-            CreateMap<Order, OrderHeaderViewModel>()
-                .ForMember(d => d.OrderState, opt => opt.MapFrom(s => s.State))
-                .ForMember(d => d.UserName, opt => opt.MapFrom(s => s.Author));
-            CreateMap<OrderViewModel, Order>();
-            CreateMap<UserViewModel, User>();
-            CreateMap<(User user, Role role), UserViewModel>()
-                .ForMember(d => d.Role, opt => opt.MapFrom(s => s.role.Name))
-                .ForMember(d => d.UserName, opt => opt.MapFrom(s => s.user.UserName))
-                .ForMember(d => d.Email, opt => opt.MapFrom(s => s.user.Email));
-            CreateMap<NewDishViewModel, Dish>();
-            
-        }
         public class ModelToViewModel : Profile
         {
             public ModelToViewModel()
@@ -45,10 +23,12 @@ namespace Restaurant.Web.Mapping
                 CreateMap<OrderModel, OrderViewModel>()
                     .ForMember(d => d.UserName, opt => opt.MapFrom(s => s.Author))
                     .ForMember(d => d.OrderState, opt => opt.MapFrom(s => s.State));
-                CreateMap<OrderPartModel, OrderDishViewModel>()
-                    .ForMember(d => d.Description, opt => opt.MapFrom(s => s.Dish.Name))
-                    .ForMember(d => d.Name, opt => opt.MapFrom(s => s.Dish.Name))
-                    .ForMember(d => d.Price, opt => opt.MapFrom(s => s.Dish.Price));
+                CreateMap<OrderPartModel, OrderPartViewModel>()
+                    .ForMember(d => d.Dish, opt => opt.ResolveUsing((s, d, i, context) => {
+                        return context.Mapper.Map<DishModel>(s.Dish);
+                    }))
+                    .ForMember(d => d.Quantity, opt => opt.MapFrom(s => s.Quantity))
+                    .ForMember(d => d.Id, opt => opt.MapFrom(s => s.Id));
             }
         }
 

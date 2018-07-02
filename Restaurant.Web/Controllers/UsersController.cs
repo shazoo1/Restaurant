@@ -37,8 +37,8 @@ namespace Restaurant.Web.Controllers
         {
             var user = _mapper.Map<UserModel>(newUserViewModel.NewUser);
             user.Id = Guid.NewGuid();
-            await UserManager.CreateAsync(user, newUserViewModel.NewUser.Password);
-            user = await UserManager.FindByNameAsync(user.UserName);
+            //await UserManager.CreateAsync(user, newUserViewModel.NewUser.Password);
+            //user = await UserManager.FindByNameAsync(user.UserName);
             var userRole = await RoleManager.FindByIdAsync(newUserViewModel.SelectedUserRoleId);
             await UserManager.AddToRoleAsync(user.Id, userRole.Name);
             return RedirectToAction("List", "Users");

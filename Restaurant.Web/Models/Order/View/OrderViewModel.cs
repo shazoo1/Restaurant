@@ -17,7 +17,7 @@ namespace Restaurant.Web.Models.Order.View
         public DateTime LastModifiedAt { get; set; }
         public string OrderState { get; set; }
         public string UserName { get; set; }
-        public List<OrderDishViewModel> OrderParts { get; set; }
+        public List<OrderPartViewModel> OrderParts { get; set; }
         public bool IsCook { get; set; }
         public bool IsWaiter { get; set; }
         public bool IsAdmin { get; set; }

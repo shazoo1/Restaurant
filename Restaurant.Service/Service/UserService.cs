@@ -33,5 +33,10 @@ namespace Restaurant.Service.Service
             });
             return (usersWithRolesTuple);
         }
+
+        public void CreateUser(UserModel userModel)
+        {
+            var user = _mapper.Map<User>(userModel);
+        }
     }
 }
